@@ -117,6 +117,25 @@
             z-index: 5;
         }
 
+        /* Smooth Top Fade for Clouds Section */
+        .clouds-fade-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            background: linear-gradient(
+                to bottom,
+                #eae3dc 0%,
+                rgba(234, 227, 220, 0.92) 20%,
+                rgba(234, 227, 220, 0.65) 45%,
+                rgba(234, 227, 220, 0.25) 75%,
+                rgba(234, 227, 220, 0) 100%
+            );
+            pointer-events: none;
+            z-index: 5;
+        }
+
         /* Scroll Reveal Animation Styles */
         .reveal {
             opacity: 0;
@@ -454,7 +473,11 @@
 
         <!-- CLOUDS & FINAL CLOSING SECTION -->
         <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px]">
+            <!-- Background Clouds Image -->
             <img src="images/clouds.png" alt="غيوم" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
+
+            <!-- Top Smooth Fade Overlay from #eae3dc -->
+            <div class="clouds-fade-top"></div>
 
             <div class="relative z-10 space-y-3 max-w-xs mx-auto flex flex-col items-center">
                 <p class="text-lg sm:text-xl text-gold-700 font-free-calligraphy leading-loose pt-2">
