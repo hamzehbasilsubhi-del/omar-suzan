@@ -216,29 +216,21 @@
         .rsvp-radio:checked + .rsvp-card-option .radio-dot-outer {
             border-color: #6b5132;
         }
-
-        /* Audio Pulse Animation for Toggle Button */
-        @keyframes audioPulse {
-            0% { box-shadow: 0 0 0 0 rgba(184, 146, 82, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(184, 146, 82, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(184, 146, 82, 0); }
-        }
-        .audio-playing {
-            animation: audioPulse 2s infinite;
-        }
     </style>
 </head>
 <body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal select-none">
 
-    <!-- BACKGROUND AUDIO WITH MULTIPLE FORMAT FALLBACKS & CrossOrigin/PlaysInline Optimization -->
-    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline x5-playsinline>
+    <!-- BACKGROUND MUSIC (started only from a real tap; see script below) -->
+    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
         <source src="images/music.mp3" type="audio/mpeg">
         <source src="images/music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- FLOATING MUSIC TOGGLE BUTTON -->
-    <button id="musicToggle" type="button" aria-label="تشغيل / إيقاف الموسيقى" class="fixed top-5 left-5 z-40 w-11 h-11 bg-[#b89252]/90 text-white rounded-full flex items-center justify-center shadow-lg border border-gold-200 backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95">
-        <i id="musicIcon" data-lucide="music-4" class="w-5 h-5"></i>
+    <!-- MUSIC ON/OFF BUTTON (fallback if a browser still blocks autoplay) -->
+    <button id="musicToggle" type="button" aria-label="تشغيل / إيقاف الموسيقى" aria-pressed="false"
+        style="position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:40;width:42px;height:42px;border-radius:9999px;border:1px solid rgba(184,146,82,.5);background:rgba(243,239,230,.88);color:#6b5132;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0;pointer-events:none;transition:opacity .5s ease;">
+        <svg id="musicIconOn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+        <svg id="musicIconOff" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
     </button>
 
     <!-- FULLSCREEN COVER OVERLAY (STATIC POSTER + VIDEO) -->
@@ -247,7 +239,7 @@
         <img id="posterImage" src="images/cover-poster.jpg" alt="غلاف الدعوة" decoding="async" class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300">
 
         <!-- 2. VIDEO PLAYER -->
-        <video id="coverVideo" playsinline webkit-playsinline x5-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
+        <video id="coverVideo" playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
             <source src="images/cover.mp4" type="video/mp4">
         </video>
 
@@ -260,7 +252,7 @@
 
         <!-- HERO FULLSCREEN BACKGROUND VIDEO SECTION -->
         <section id="heroSection" class="relative w-full h-[100dvh] min-h-[580px] sm:min-h-[720px] flex flex-col justify-between items-center text-center overflow-hidden pb-6 px-6">
-            <video autoplay loop muted playsinline webkit-playsinline x5-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
                 <source src="images/hero-bg.mp4" type="video/mp4">
             </video>
             
@@ -677,130 +669,114 @@
             const sealClickArea = document.getElementById('sealClickArea');
             const bgMusic = document.getElementById('bgMusic');
             const heroSection = document.getElementById('heroSection');
+
             const musicToggle = document.getElementById('musicToggle');
-            const musicIcon = document.getElementById('musicIcon');
+            const iconOn = document.getElementById('musicIconOn');
+            const iconOff = document.getElementById('musicIconOff');
 
-            let isAudioUnlocked = false;
-            let audioContext = null;
+            let musicStarted = false;   // true once playback has really begun
+            let userPaused = false;     // true only if the guest turned music off
 
-            // Update UI State for Music Button
-            function updateMusicUI(isPlaying) {
-                if (!musicToggle) return;
-                if (isPlaying) {
-                    musicToggle.classList.add('audio-playing');
-                    musicToggle.classList.replace('bg-gray-500', 'bg-[#b89252]/90');
-                } else {
-                    musicToggle.classList.remove('audio-playing');
-                    musicToggle.classList.replace('bg-[#b89252]/90', 'bg-gray-500');
+            // ---------- MUSIC ----------
+            function updateMusicButton() {
+                const playing = !!bgMusic && !bgMusic.paused;
+                if (iconOn) iconOn.style.display = playing ? 'block' : 'none';
+                if (iconOff) iconOff.style.display = playing ? 'none' : 'block';
+                if (musicToggle) musicToggle.setAttribute('aria-pressed', String(playing));
+            }
+
+            function startMusic() {
+                if (!bgMusic || userPaused || !bgMusic.paused) return;
+                bgMusic.muted = false;
+                bgMusic.volume = 1;
+                const p = bgMusic.play();
+                if (p && typeof p.then === 'function') {
+                    p.then(() => { musicStarted = true; updateMusicButton(); })
+                     .catch(() => { updateMusicButton(); });
                 }
             }
 
-            // Advanced Robust Audio Unlock Engine
-            function unlockAudioEngine() {
-                if (isAudioUnlocked && bgMusic && !bgMusic.paused) return Promise.resolve(true);
-
-                // Initialize / Resume Web Audio Context
-                try {
-                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                    if (AudioCtx && !audioContext) {
-                        audioContext = new AudioCtx();
+            if (bgMusic) {
+                bgMusic.addEventListener('play', updateMusicButton);
+                bgMusic.addEventListener('pause', () => {
+                    updateMusicButton();
+                    // Android may pause audio when another media starts or focus changes: resume.
+                    if (musicStarted && !userPaused && !document.hidden) {
+                        setTimeout(() => { if (bgMusic.paused && !userPaused) startMusic(); }, 400);
                     }
-                    if (audioContext && audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                } catch (e) {
-                    console.warn("Web AudioContext resume warning:", e);
-                }
-
-                if (!bgMusic) return Promise.reject("Audio element not found");
-
-                bgMusic.volume = 1.0;
-                
-                // Attempt direct unmuted play
-                const playPromise = bgMusic.play();
-
-                if (playPromise !== undefined) {
-                    return playPromise.then(() => {
-                        isAudioUnlocked = true;
-                        updateMusicUI(true);
-                        return true;
-                    }).catch(err => {
-                        console.warn("Direct play rejected, trying muted fallback:", err);
-                        // Strict Muted-to-Unmuted Fallback Technique for Android WebView
-                        bgMusic.muted = true;
-                        return bgMusic.play().then(() => {
-                            bgMusic.muted = false;
-                            isAudioUnlocked = true;
-                            updateMusicUI(true);
-                            return true;
-                        }).catch(finalErr => {
-                            console.error("Audio playback fully blocked until explicit gesture:", finalErr);
-                            updateMusicUI(false);
-                            return false;
-                        });
-                    });
-                }
-                return Promise.resolve(false);
-            }
-
-            // Floating Toggle Button Handler
-            if (musicToggle) {
-                musicToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (!bgMusic) return;
-
-                    if (bgMusic.paused) {
-                        unlockAudioEngine();
-                    } else {
-                        bgMusic.pause();
-                        updateMusicUI(false);
+                });
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        if (!bgMusic.paused) bgMusic.pause();
+                    } else if (musicStarted && !userPaused) {
+                        startMusic();
                     }
                 });
             }
 
-            // Global Touch Listener to capture earliest user interaction
-            function handleGlobalGesture() {
-                unlockAudioEngine();
-                document.removeEventListener('touchstart', handleGlobalGesture);
-                document.removeEventListener('click', handleGlobalGesture);
-                document.removeEventListener('pointerdown', handleGlobalGesture);
+            if (musicToggle) {
+                musicToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!bgMusic) return;
+                    if (bgMusic.paused) {
+                        userPaused = false;
+                        startMusic();
+                    } else {
+                        userPaused = true;
+                        bgMusic.pause();
+                    }
+                });
             }
-            document.addEventListener('touchstart', handleGlobalGesture, { passive: true });
-            document.addEventListener('click', handleGlobalGesture, { passive: true });
-            document.addEventListener('pointerdown', handleGlobalGesture, { passive: true });
 
-            function triggerHeroSequence() {
-                if (heroSection) {
-                    heroSection.classList.add('hero-revealed');
+            // Android only accepts audio started from "click"/"touchend" (NOT touchstart/pointerdown).
+            // Keep retrying on those gestures until the music is actually playing.
+            function retryOnGesture() {
+                startMusic();
+                if (musicStarted) {
+                    document.removeEventListener('click', retryOnGesture, true);
+                    document.removeEventListener('touchend', retryOnGesture, true);
                 }
+            }
+            document.addEventListener('click', retryOnGesture, true);
+            document.addEventListener('touchend', retryOnGesture, true);
+
+            // ---------- COVER ----------
+            function triggerHeroSequence() {
+                if (heroSection) heroSection.classList.add('hero-revealed');
             }
 
             function dismissCover() {
                 if (videoCover && !videoCover.classList.contains('fade-out')) {
                     videoCover.classList.add('fade-out');
                     triggerHeroSequence();
-                    unlockAudioEngine();
+                    if (musicToggle) {
+                        musicToggle.style.opacity = '1';
+                        musicToggle.style.pointerEvents = 'auto';
+                    }
+                    startMusic(); // safety net; normally already playing
                 }
             }
 
             let isInteractionHandled = false;
 
-            function handleUserInteraction(e) {
+            function handleUserInteraction() {
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
-                unlockAudioEngine();
+                // Start the music FIRST, directly inside the tap (valid user gesture).
+                startMusic();
 
                 if (posterImage) posterImage.style.opacity = '0';
 
                 if (coverVideo) {
+                    // Cover video must be muted: on Android an unmuted video steals audio focus
+                    // and pauses the background music. The music is the soundtrack.
+                    coverVideo.muted = true;
+                    coverVideo.setAttribute('muted', '');
                     coverVideo.classList.remove('hidden');
-                    coverVideo.muted = false;
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
-                        videoPromise.catch(() => {
-                            dismissCover();
-                        });
+                        videoPromise.catch(dismissCover);
                     }
                 } else {
                     dismissCover();
@@ -808,9 +784,9 @@
             }
 
             if (sealClickArea) {
-                sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
-                sealClickArea.addEventListener('touchstart', handleUserInteraction, { passive: true, once: true });
-                sealClickArea.addEventListener('pointerdown', handleUserInteraction, { passive: true, once: true });
+                // "click" is the reliable gesture on Android; "touchend" covers odd WebViews.
+                sealClickArea.addEventListener('click', handleUserInteraction);
+                sealClickArea.addEventListener('touchend', handleUserInteraction, { passive: true });
             }
 
             if (coverVideo) {
