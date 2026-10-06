@@ -49,21 +49,16 @@
     </script>
 
     <style>
-        * {
+        *, ::before, ::after {
+            box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        input, textarea, button, a, iframe {
-            -webkit-user-select: auto;
-            user-select: auto;
         }
 
         html, body {
             width: 100%;
-            height: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
             margin: 0;
             padding: 0;
             background-color: #000000;
@@ -71,9 +66,15 @@
             color: #5c4a28;
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .font-tajawal, [lang="ar"], body, h1, h2, h3, h4, p, span, div, a {
+
+        input, textarea, button, a, select {
+            -webkit-user-select: auto;
+            user-select: auto;
+        }
+
+        body, h1, h2, h3, h4, p, span, div, a {
             letter-spacing: normal !important;
         }
 
@@ -81,23 +82,18 @@
             font-family: 'Aref Ruqaa', serif;
             letter-spacing: normal !important;
         }
+
         .font-sloop {
             font-family: 'Great Vibes', cursive;
         }
 
-        /* Section Title Style - خط حديث ومقروء جداً لعناوين الأقسام */
+        /* Section Title Style */
         .section-title {
             font-family: 'Cairo', sans-serif !important;
             font-weight: 800;
-            font-size: 1.5rem; /* 24px */
+            font-size: clamp(1.35rem, 5vw, 1.85rem);
             line-height: 1.3;
             letter-spacing: 0.01em !important;
-        }
-
-        @media (min-width: 640px) {
-            .section-title {
-                font-size: 1.85rem; /* ~30px */
-            }
         }
 
         /* Modern & Extended Naskh Typography Classes */
@@ -135,19 +131,18 @@
         .hero-reveal-2,
         .hero-reveal-3 {
             opacity: 0;
-            will-change: opacity, transform;
         }
 
         .hero-revealed .hero-reveal-1 {
-            animation: heroFadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+            animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
         }
 
         .hero-revealed .hero-reveal-2 {
-            animation: heroFadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+            animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
         }
 
         .hero-revealed .hero-reveal-3 {
-            animation: heroFadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+            animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
         }
 
         /* Smooth Top Fade for Clouds Section */
@@ -173,19 +168,20 @@
         .reveal {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+            will-change: auto;
         }
 
         .circle-container {
             position: relative;
-            width: 76px;
-            height: 76px;
+            width: clamp(64px, 18vw, 76px);
+            height: clamp(64px, 18vw, 76px);
         }
         .circle-bg {
             fill: none;
@@ -204,7 +200,7 @@
 
         /* RSVP Custom Options Styles */
         .rsvp-card-option {
-            transition: all 0.25s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             background-color: rgba(247, 245, 240, 0.7);
             border: 1.5px solid #bdab93;
         }
@@ -222,33 +218,33 @@
         }
     </style>
 </head>
-<body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal">
+<body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal select-none">
 
     <!-- BACKGROUND AUDIO -->
-    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
+    <audio id="bgMusic" loop preload="auto" playsinline>
         <source src="images/music.mp3" type="audio/mpeg">
     </audio>
 
     <!-- FULLSCREEN COVER OVERLAY (STATIC POSTER + VIDEO) -->
-    <div id="videoCover" class="fixed inset-0 z-50 flex items-center justify-center bg-[#eae3dc] overflow-hidden select-none">
+    <div id="videoCover" class="fixed inset-0 z-50 flex items-center justify-center bg-[#eae3dc] overflow-hidden">
         <!-- 1. INSTANT STATIC POSTER -->
         <img id="posterImage" src="images/cover-poster.jpg" alt="غلاف الدعوة" decoding="async" class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300">
 
         <!-- 2. VIDEO PLAYER -->
-        <video id="coverVideo" playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true" preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
+        <video id="coverVideo" playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
             <source src="images/cover.mp4" type="video/mp4">
         </video>
 
         <!-- 3. INVISIBLE FULL-SCREEN TAP LAYER -->
-        <div id="sealClickArea" class="absolute inset-0 z-20 w-full h-full cursor-pointer bg-transparent"></div>
+        <button id="sealClickArea" type="button" aria-label="فتح الدعوة" class="absolute inset-0 z-20 w-full h-full cursor-pointer bg-transparent border-0 outline-none"></button>
     </div>
 
     <!-- Mobile Screen Frame Container (Max Width 430px) -->
     <div class="w-full max-w-[430px] bg-[#eae3dc] sm:rounded-[40px] shadow-2xl overflow-hidden relative flex flex-col my-auto border-0 sm:border border-gold-200/50">
 
         <!-- HERO FULLSCREEN BACKGROUND VIDEO SECTION -->
-        <section id="heroSection" class="relative w-full h-[100dvh] min-h-[600px] sm:min-h-[740px] flex flex-col justify-between items-center text-center overflow-hidden pb-6 px-6">
-            <video autoplay loop muted playsinline webkit-playsinline x5-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+        <section id="heroSection" class="relative w-full h-[100dvh] min-h-[580px] sm:min-h-[720px] flex flex-col justify-between items-center text-center overflow-hidden pb-6 px-6">
+            <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
                 <source src="images/hero-bg.mp4" type="video/mp4">
             </video>
             
@@ -256,7 +252,7 @@
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent via-60% to-[#eae3dc] z-0 pointer-events-none"></div>
 
             <!-- Content Wrapper -->
-            <div class="relative z-10 w-full max-w-xs mx-auto pt-14 sm:pt-20 flex flex-col items-center space-y-5">
+            <div class="relative z-10 w-full max-w-xs mx-auto pt-12 sm:pt-20 flex flex-col items-center space-y-4 sm:space-y-5">
                 
                 <!-- 1. Monogram Logo -->
                 <div class="hero-reveal-1 mt-2">
@@ -289,18 +285,18 @@
         </section>
 
         <!-- WELCOME SECTION WITH SMOOTH BLENDING AT TOP -->
-        <section id="welcomeSection" class="relative z-20 w-full min-h-[540px] py-14 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
+        <section id="welcomeSection" class="relative z-20 w-full min-h-[500px] py-12 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
             <!-- Background Image -->
             <img src="images/welcome-bg.png" alt="خلفية الترحيب" decoding="async" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
 
-            <!-- Top Smooth Gradient Fade to Blend Seamlessly with hero-bg -->
+            <!-- Top Smooth Gradient Fade -->
             <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#eae3dc] via-[#eae3dc]/70 to-transparent z-0 pointer-events-none"></div>
 
-            <!-- Bottom Smooth Gradient Fade to Blend Seamlessly with Next Section -->
+            <!-- Bottom Smooth Gradient Fade -->
             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#eae3dc] via-[#eae3dc]/60 to-transparent z-0 pointer-events-none"></div>
 
             <!-- Content Container Layer -->
-            <div class="relative z-10 max-w-sm mx-auto space-y-6 flex flex-col items-center justify-center my-auto">
+            <div class="relative z-10 max-w-sm mx-auto space-y-5 flex flex-col items-center justify-center my-auto">
                 <!-- Top Monogram Image -->
                 <div>
                     <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm">
@@ -328,7 +324,7 @@
                 </div>
 
                 <!-- Divider Image -->
-                <div class="flex items-center justify-center pt-2">
+                <div class="flex items-center justify-center pt-1">
                     <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-36 h-auto object-contain opacity-85">
                 </div>
             </div>
@@ -341,7 +337,7 @@
             <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
             <!-- Main Content Container -->
-            <div class="relative z-10 space-y-6 max-w-sm mx-auto flex flex-col items-center w-full">
+            <div class="relative z-10 space-y-5 max-w-sm mx-auto flex flex-col items-center w-full">
                 
                 <!-- Intro Phrases -->
                 <div class="space-y-1 text-gold-700 font-tajawal w-full font-normal text-xs sm:text-sm">
@@ -390,8 +386,8 @@
 
         <!-- EVENT DETAILS SECTION -->
         <section id="details" class="py-12 px-6 bg-[#eae3dc] text-center reveal relative z-10">
-            <div class="max-w-xs mx-auto space-y-6">
-                <!-- Section Title (Cairo Font) -->
+            <div class="max-w-xs mx-auto space-y-5">
+                <!-- Section Title -->
                 <div class="space-y-2">
                     <h2 class="section-title text-gold-700">موقع الحفل</h2>
                     <div class="flex items-center justify-center">
@@ -399,21 +395,20 @@
                     </div>
                 </div>
 
-                <!-- 1. VENUE IMAGE (FIRST) -->
-                <div class="w-full my-3 flex items-center justify-center">
+                <!-- 1. VENUE IMAGE -->
+                <div class="w-full my-2 flex items-center justify-center">
                     <img src="images/venue.png" alt="فندق بالازو فيرساتشي" decoding="async" class="w-full h-auto object-contain rounded-2xl shadow-sm">
                 </div>
 
-                <!-- 2. VENUE NAME & ADDRESS (SECOND) -->
-                <div class="space-y-1.5 text-sm text-bronze/90 font-tajawal py-1">
+                <!-- 2. VENUE NAME & ADDRESS -->
+                <div class="space-y-1 text-sm text-bronze/90 font-tajawal py-1">
                     <p class="font-bold text-base sm:text-lg text-gold-700">فندق بالازو فيرساتشي</p>
                     <p class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
                 </div>
 
-                <!-- 3. EMBEDDED GOOGLE MAP WITH CUSTOM FRAME OVERLAY (THIRD) -->
+                <!-- 3. EMBEDDED GOOGLE MAP -->
                 <div class="w-full my-2 flex items-center justify-center">
                     <div class="relative w-full max-w-[310px] aspect-square rounded-[32px] overflow-hidden shadow-md flex items-center justify-center bg-[#eae3dc]">
-                        <!-- Embedded Google Map -->
                         <div class="absolute inset-[3%] rounded-[28px] overflow-hidden">
                             <iframe 
                                 title="خريطة موقع الحفل"
@@ -424,7 +419,6 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <!-- Golden Frame Overlay Image -->
                         <img src="images/map-frame.png" alt="إطار الخريطة الذهبي" decoding="async" class="absolute inset-0 w-full h-full object-fill pointer-events-none z-10">
                     </div>
                 </div>
@@ -445,31 +439,29 @@
         <!-- COUNTDOWN TIMER SECTION -->
         <section id="countdownSection" class="relative pt-12 pb-8 px-0 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal z-20">
             
-            <!-- Countdown Content -->
             <div class="relative z-10 w-full flex flex-col items-center">
-                <!-- CLOCK ILLUSTRATION ABOVE COUNTDOWN TITLE -->
+                <!-- CLOCK ILLUSTRATION -->
                 <div class="w-full flex justify-center items-center mb-3">
-                    <img src="images/clock.png" alt="ساعة كلاسيكية مزخرفة للعداد التنازلي" decoding="async" class="w-36 sm:w-44 h-auto object-contain drop-shadow-md">
+                    <img src="images/clock.png" alt="ساعة كلاسيكية" decoding="async" class="w-36 sm:w-44 h-auto object-contain drop-shadow-md">
                 </div>
 
                 <div class="space-y-2 mb-8 px-4">
-                    <!-- Section Title (Cairo Font) -->
                     <h2 class="section-title text-gold-700">الوقت المتبقي</h2>
                     <div class="flex items-center justify-center pt-1 px-4">
                         <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                     </div>
                 </div>
 
-                <div id="countdown" class="grid grid-cols-4 gap-2 sm:gap-3 max-w-[360px] mx-auto px-4">
+                <div id="countdown" class="grid grid-cols-4 gap-1.5 sm:gap-3 max-w-[360px] mx-auto px-2 sm:px-4 w-full justify-items-center">
                     <div class="flex flex-col items-center">
                         <div class="circle-container flex items-center justify-center">
                             <svg class="w-full h-full" viewBox="0 0 80 80">
                                 <circle class="circle-bg" cx="40" cy="40" r="36" />
                                 <circle id="daysCircle" class="circle-progress" cx="40" cy="40" r="36" stroke-dasharray="226.19" stroke-dashoffset="226.19" />
                             </svg>
-                            <span id="days" class="absolute text-lg font-tajawal text-bronze font-bold">00</span>
+                            <span id="days" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-3">يوم</span>
+                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">يوم</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -478,9 +470,9 @@
                                 <circle class="circle-bg" cx="40" cy="40" r="36" />
                                 <circle id="hoursCircle" class="circle-progress" cx="40" cy="40" r="36" stroke-dasharray="226.19" stroke-dashoffset="226.19" />
                             </svg>
-                            <span id="hours" class="absolute text-lg font-tajawal text-bronze font-bold">00</span>
+                            <span id="hours" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-3">ساعة</span>
+                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ساعة</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -489,9 +481,9 @@
                                 <circle class="circle-bg" cx="40" cy="40" r="36" />
                                 <circle id="minutesCircle" class="circle-progress" cx="40" cy="40" r="36" stroke-dasharray="226.19" stroke-dashoffset="226.19" />
                             </svg>
-                            <span id="minutes" class="absolute text-lg font-tajawal text-bronze font-bold">00</span>
+                            <span id="minutes" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-3">دقيقة</span>
+                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">دقيقة</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -500,9 +492,9 @@
                                 <circle class="circle-bg" cx="40" cy="40" r="36" />
                                 <circle id="secondsCircle" class="circle-progress" cx="40" cy="40" r="36" stroke-dasharray="226.19" stroke-dashoffset="226.19" />
                             </svg>
-                            <span id="seconds" class="absolute text-lg font-tajawal text-bronze font-bold">00</span>
+                            <span id="seconds" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-3">ثانية</span>
+                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ثانية</span>
                     </div>
                 </div>
 
@@ -512,16 +504,16 @@
             </div>
         </section>
 
-        <!-- RSVP SECTION WITH CHAIR ICON, NOTICE TEXT (NO BORDER + DIVIDER), AND CAIRO SECTION TITLE -->
+        <!-- RSVP SECTION -->
         <section id="rsvp" class="py-10 px-6 bg-[#eae3dc] reveal z-10">
-            <div class="max-w-[320px] mx-auto space-y-6">
+            <div class="max-w-[320px] mx-auto space-y-5">
                 
                 <!-- DIVIDER ABOVE NOTICE TEXT -->
                 <div class="flex items-center justify-center pt-2">
                     <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                 </div>
 
-                <!-- 1. TEXT NOTICE ABOVE RSVP SECTION (BORDERLESS & CLEAN) -->
+                <!-- NOTICE TEXT -->
                 <div class="text-center px-2 py-1 space-y-2">
                     <p class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
                         لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
@@ -531,38 +523,38 @@
                     </p>
                 </div>
 
-                <!-- 2. CHAIR IMAGE (CHAIR.PNG) ABOVE RSVP TITLE -->
+                <!-- CHAIR IMAGE -->
                 <div class="w-full flex justify-center items-center pt-2">
                     <img src="images/chair.png" alt="كرسي الزفاف" decoding="async" class="w-24 sm:w-28 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
-                <!-- 3. RSVP SECTION TITLE (CAIRO FONT) -->
+                <!-- RSVP TITLE -->
                 <div class="text-center space-y-1">
                     <p class="font-free-calligraphy text-base sm:text-lg text-rsvpDark/80">سرور حضورك</p>
                     <h2 class="section-title text-2xl sm:text-3xl text-rsvpDark tracking-tight">يرجى تأكيد الحضور</h2>
                 </div>
 
                 <!-- Form Area -->
-                <form id="rsvpForm" class="space-y-5">
+                <form id="rsvpForm" class="space-y-4">
                     
                     <!-- NAME INPUT FIELD -->
                     <div class="space-y-1.5">
                         <div class="text-right space-y-0.5 pr-1">
-                            <p class="text-sm font-bold text-rsvpDark">الاسم الكامل</p>
+                            <label for="guestName" class="text-sm font-bold text-rsvpDark block">الاسم الكامل</label>
                             <p class="text-xs text-rsvpDark/70">الاسم الثلاثي</p>
                         </div>
                         <div class="relative flex items-center">
-                            <input type="text" id="guestName" required placeholder="اسمك الكريم" class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 pl-10 text-right text-sm text-rsvpDark placeholder-[#a19079] focus:outline-none focus:border-rsvpDark transition shadow-sm">
+                            <input type="text" id="guestName" name="guestName" required placeholder="اسمك الكريم" class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 pl-10 text-right text-sm text-rsvpDark placeholder-[#a19079] focus:outline-none focus:border-rsvpDark transition shadow-sm">
                             <div class="absolute left-3.5 text-[#a19079] pointer-events-none">
                                 <i data-lucide="wallet" class="w-4 h-4"></i>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ATTENDANCE OPTIONS (RADIO CARDS) -->
-                    <div class="space-y-2.5 pt-1">
+                    <!-- ATTENDANCE OPTIONS -->
+                    <div class="space-y-2 pt-1">
                         <div class="text-right space-y-0.5 pr-1">
-                            <p class="text-sm font-bold text-rsvpDark">هل ستنضم إلينا؟</p>
+                            <span class="text-sm font-bold text-rsvpDark block">هل ستنضم إلينا؟</span>
                             <p class="text-xs text-rsvpDark/70">هل ستحضر؟</p>
                         </div>
 
@@ -600,16 +592,16 @@
                     <!-- GUESTS COUNTER FIELD -->
                     <div class="space-y-1.5 pt-1">
                         <div class="text-right space-y-0.5 pr-1">
-                            <p class="text-sm font-bold text-rsvpDark">عدد المدعوين</p>
+                            <span class="text-sm font-bold text-rsvpDark block">عدد المدعوين</span>
                             <p class="text-xs text-rsvpDark/70">المدعوين المشمولين</p>
                         </div>
                         
                         <div class="flex items-center justify-between bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-2 px-4 shadow-sm">
-                            <button type="button" id="btnPlus" class="w-8 h-8 flex items-center justify-center text-rsvpDark text-lg font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
+                            <button type="button" id="btnPlus" aria-label="زيادة العدد" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
                                 +
                             </button>
-                            <span id="guestsDisplay" class="text-sm font-bold text-rsvpDark tracking-widest dir-ltr">02</span>
-                            <button type="button" id="btnMinus" class="w-8 h-8 flex items-center justify-center text-rsvpDark text-lg font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
+                            <span id="guestsDisplay" class="text-base font-bold text-rsvpDark tracking-widest dir-ltr">02</span>
+                            <button type="button" id="btnMinus" aria-label="إنقاص العدد" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
                                 −
                             </button>
                         </div>
@@ -633,12 +625,12 @@
             </div>
         </section>
 
-        <!-- CLOUDS & FINAL CLOSING SECTION WITH MONOGRAM -->
+        <!-- CLOUDS & FINAL CLOSING SECTION -->
         <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px] z-10">
             <!-- Background Clouds Image -->
             <img src="images/clouds.png" alt="غيوم" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
 
-            <!-- Top Smooth Fade Overlay from #eae3dc -->
+            <!-- Top Smooth Fade Overlay -->
             <div class="clouds-fade-top"></div>
 
             <div class="relative z-10 space-y-5 max-w-xs mx-auto flex flex-col items-center">
@@ -655,11 +647,12 @@
 
     </div>
 
-    <!-- Scripts -->
+    <!-- Optimized Scripts Block -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) {
-                lucide.createIcons();
+            // Safe Lucide Icons Init
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
             }
 
             const videoCover = document.getElementById('videoCover');
@@ -692,12 +685,12 @@
                     e.preventDefault();
                 }
 
-                // 1. Play Background Music
+                // Play Audio
                 if (bgMusic) {
-                    bgMusic.play().catch(err => console.warn("Audio play prevented:", err));
+                    bgMusic.play().catch(err => console.warn("Audio autoplay blocked:", err));
                 }
 
-                // 2. Play Cover Video
+                // Play Cover Video
                 if (posterImage) posterImage.style.opacity = '0';
                 if (coverVideo) {
                     coverVideo.classList.remove('hidden');
@@ -720,20 +713,24 @@
                 coverVideo.addEventListener('ended', dismissCover);
             }
 
-            // Scroll Reveal Observer
+            // Optimized IntersectionObserver
             const revealElements = document.querySelectorAll('.reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -50px 0px', threshold: 0.05 });
 
-            revealElements.forEach(el => observer.observe(el));
+                revealElements.forEach(el => observer.observe(el));
+            } else {
+                revealElements.forEach(el => el.classList.add('active'));
+            }
 
-            // Countdown Timer Logic
+            // Countdown Timer Logic (Memory-Leak Free)
             const eventDate = new Date('November 14, 2026 19:30:00').getTime();
             const circumference = 226.19;
 
@@ -764,10 +761,7 @@
                     if (minutesCircle) minutesCircle.style.strokeDashoffset = circumference;
                     if (secondsCircle) secondsCircle.style.strokeDashoffset = circumference;
 
-                    if (countdownInterval) {
-                        clearInterval(countdownInterval);
-                        countdownInterval = null;
-                    }
+                    stopCountdown();
                     return;
                 }
 
@@ -787,8 +781,32 @@
                 if (secondsCircle) secondsCircle.style.strokeDashoffset = circumference - (seconds / 60) * circumference;
             }
 
-            countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown();
+            function startCountdown() {
+                if (!countdownInterval) {
+                    updateCountdown();
+                    countdownInterval = setInterval(updateCountdown, 1000);
+                }
+            }
+
+            function stopCountdown() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+            }
+
+            startCountdown();
+
+            // Pause countdown timer when page is hidden to preserve battery/RAM
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopCountdown();
+                } else {
+                    startCountdown();
+                }
+            });
+
+            window.addEventListener('beforeunload', stopCountdown);
 
             // Dynamic Calendar Link Setup
             const addToCalBtn = document.getElementById('addToCalendar');
@@ -799,7 +817,7 @@
                 addToCalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=20261114T153000Z/20261114T200000Z&details=${calDetails}&location=${calLocation}`;
             }
 
-            // RSVP Counter Controller (+ / -)
+            // RSVP Counter Controller
             let currentGuestsCount = 2;
             const guestsDisplay = document.getElementById('guestsDisplay');
             const btnPlus = document.getElementById('btnPlus');
