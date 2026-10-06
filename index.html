@@ -220,9 +220,10 @@
 </head>
 <body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal select-none">
 
-    <!-- BACKGROUND AUDIO -->
-    <audio id="bgMusic" loop preload="auto" playsinline>
+    <!-- BACKGROUND AUDIO WITH MULTIPLE FORMAT FALLBACKS -->
+    <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
         <source src="images/music.mp3" type="audio/mpeg">
+        <source src="images/music.ogg" type="audio/ogg">
     </audio>
 
     <!-- FULLSCREEN COVER OVERLAY (STATIC POSTER + VIDEO) -->
@@ -677,6 +678,28 @@
 
             let isInteractionHandled = false;
 
+            // Robust Audio Unlock for Mobile Browsers (iOS Safari & Android Chrome)
+            function unlockAudio() {
+                if (!bgMusic) return;
+                bgMusic.load();
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Audio playing successfully
+                    }).catch(err => {
+                        console.warn("Audio autoplay initial block:", err);
+                        // Retry on next touch anywhere on document if blocked
+                        const retryPlay = () => {
+                            bgMusic.play().catch(e => console.warn("Retry failed:", e));
+                            document.removeEventListener('touchstart', retryPlay);
+                            document.removeEventListener('click', retryPlay);
+                        };
+                        document.addEventListener('touchstart', retryPlay, { once: true });
+                        document.addEventListener('click', retryPlay, { once: true });
+                    });
+                }
+            }
+
             function handleUserInteraction(e) {
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
@@ -685,19 +708,17 @@
                     e.preventDefault();
                 }
 
-                // Play Audio
-                if (bgMusic) {
-                    bgMusic.play().catch(err => console.warn("Audio autoplay blocked:", err));
-                }
+                // Immediately unlock audio on user gesture
+                unlockAudio();
 
-                // Play Cover Video
+                // Play Cover Video safely
                 if (posterImage) posterImage.style.opacity = '0';
                 if (coverVideo) {
                     coverVideo.classList.remove('hidden');
                     coverVideo.muted = false;
-                    const playPromise = coverVideo.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(() => dismissCover());
+                    const videoPromise = coverVideo.play();
+                    if (videoPromise !== undefined) {
+                        videoPromise.catch(() => dismissCover());
                     }
                 } else {
                     dismissCover();
@@ -730,7 +751,7 @@
                 revealElements.forEach(el => el.classList.add('active'));
             }
 
-            // Countdown Timer Logic (Memory-Leak Free)
+            // Countdown Timer Logic
             const eventDate = new Date('November 14, 2026 19:30:00').getTime();
             const circumference = 226.19;
 
@@ -797,7 +818,6 @@
 
             startCountdown();
 
-            // Pause countdown timer when page is hidden to preserve battery/RAM
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
                     stopCountdown();
