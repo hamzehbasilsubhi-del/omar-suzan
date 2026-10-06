@@ -13,6 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Great+Vibes&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
+    <!-- Preconnect for Fast Google Maps Loading -->
+    <link rel="preconnect" href="https://maps.google.com">
+    <link rel="dns-prefetch" href="https://maps.google.com">
+
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -263,11 +267,11 @@
             <!-- GRADIENT OVERLAY -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent via-60% to-[#eae3dc] z-0 pointer-events-none"></div>
 
-            <!-- Content Wrapper -->
-            <div class="relative z-10 w-full max-w-xs mx-auto pt-12 sm:pt-20 flex flex-col items-center space-y-4 sm:space-y-5">
+            <!-- Content Wrapper (Moved lower with pt-20 sm:pt-28) -->
+            <div class="relative z-10 w-full max-w-xs mx-auto pt-20 sm:pt-28 flex flex-col items-center space-y-4 sm:space-y-5">
                 
                 <!-- 1. Monogram Logo -->
-                <div class="hero-reveal-1 mt-2">
+                <div class="hero-reveal-1">
                     <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
@@ -411,8 +415,8 @@
             </div>
         </section>
 
-        <!-- EVENT DETAILS SECTION -->
-        <section id="details" class="py-12 px-6 bg-[#eae3dc] text-center reveal relative z-10">
+        <!-- EVENT DETAILS SECTION (MAP OPTIMIZED) -->
+        <section id="details" class="py-12 px-6 bg-[#eae3dc] text-center relative z-10">
             <div class="max-w-xs mx-auto space-y-5">
                 <!-- Section Title -->
                 <div class="space-y-2">
@@ -433,7 +437,7 @@
                     <p class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
                 </div>
 
-                <!-- EMBEDDED GOOGLE MAP -->
+                <!-- EMBEDDED GOOGLE MAP (FAST EAGER LOAD) -->
                 <div class="w-full my-2 flex items-center justify-center">
                     <div class="relative w-full max-w-[310px] aspect-square rounded-[32px] overflow-hidden shadow-md flex items-center justify-center bg-[#eae3dc]">
                         <div class="absolute inset-[3%] rounded-[28px] overflow-hidden z-0">
@@ -442,7 +446,7 @@
                                 src="https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=ar&z=16&output=embed" 
                                 class="w-full h-full border-0 grayscale-[20%] contrast-[105%]" 
                                 allowfullscreen="" 
-                                loading="lazy" 
+                                loading="eager"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
