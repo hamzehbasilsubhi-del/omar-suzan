@@ -220,7 +220,7 @@
 </head>
 <body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal select-none">
 
-    <!-- BACKGROUND AUDIO WITH MULTIPLE FORMAT FALLBACKS -->
+    <!-- BACKGROUND AUDIO WITH MULTIPLE FORMAT FALLBACKS & CrossOrigin/PlaysInline Optimization -->
     <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
         <source src="images/music.mp3" type="audio/mpeg">
         <source src="images/music.ogg" type="audio/ogg">
@@ -663,6 +663,53 @@
             const bgMusic = document.getElementById('bgMusic');
             const heroSection = document.getElementById('heroSection');
 
+            let isAudioUnlocked = false;
+            let audioCtx = null;
+
+            // 1. RADICAL AUDIO UNLOCK MECHANISM (ANDROID & IOS COMPATIBLE)
+            function forceUnlockAudio() {
+                if (isAudioUnlocked) return;
+
+                // Web Audio API Context Resume
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext) {
+                        if (!audioCtx) audioCtx = new AudioContext();
+                        if (audioCtx.state === 'suspended') {
+                            audioCtx.resume();
+                        }
+                    }
+                } catch (e) {
+                    console.warn("AudioContext unlock ignored:", e);
+                }
+
+                // HTML5 Audio Element Unlock inside user gesture
+                if (bgMusic) {
+                    bgMusic.volume = 1.0;
+                    const playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            isAudioUnlocked = true;
+                        }).catch(err => {
+                            console.warn("Autoplay blocked on gesture, trying muted unlock:", err);
+                        });
+                    }
+                }
+            }
+
+            // Global fallbacks for any user touch to ensure audio capability on strict Android WebViews
+            function globalTouchUnlockHandler() {
+                forceUnlockAudio();
+                if (isAudioUnlocked) {
+                    document.removeEventListener('touchstart', globalTouchUnlockHandler);
+                    document.removeEventListener('click', globalTouchUnlockHandler);
+                    document.removeEventListener('pointerdown', globalTouchUnlockHandler);
+                }
+            }
+            document.addEventListener('touchstart', globalTouchUnlockHandler, { passive: true, once: false });
+            document.addEventListener('click', globalTouchUnlockHandler, { once: false });
+            document.addEventListener('pointerdown', globalTouchUnlockHandler, { passive: true, once: false });
+
             function triggerHeroSequence() {
                 if (heroSection) {
                     heroSection.classList.add('hero-revealed');
@@ -673,52 +720,42 @@
                 if (videoCover && !videoCover.classList.contains('fade-out')) {
                     videoCover.classList.add('fade-out');
                     triggerHeroSequence();
+
+                    // Play background music reliably after cover dismissal
+                    if (bgMusic) {
+                        const playPromise = bgMusic.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(() => {
+                                // Mute & Retry Fallback for super strict devices
+                                bgMusic.muted = true;
+                                bgMusic.play().then(() => {
+                                    bgMusic.muted = false;
+                                }).catch(e => console.error("Final audio play failure:", e));
+                            });
+                        }
+                    }
                 }
             }
 
             let isInteractionHandled = false;
 
-            // Robust Audio Unlock for Mobile Browsers (iOS Safari & Android Chrome)
-            function unlockAudio() {
-                if (!bgMusic) return;
-                bgMusic.load();
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        // Audio playing successfully
-                    }).catch(err => {
-                        console.warn("Audio autoplay initial block:", err);
-                        // Retry on next touch anywhere on document if blocked
-                        const retryPlay = () => {
-                            bgMusic.play().catch(e => console.warn("Retry failed:", e));
-                            document.removeEventListener('touchstart', retryPlay);
-                            document.removeEventListener('click', retryPlay);
-                        };
-                        document.addEventListener('touchstart', retryPlay, { once: true });
-                        document.addEventListener('click', retryPlay, { once: true });
-                    });
-                }
-            }
-
             function handleUserInteraction(e) {
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
-                if (e && e.cancelable && e.type !== 'touchstart') {
-                    e.preventDefault();
-                }
+                // Force unlock audio immediately on tap/click
+                forceUnlockAudio();
 
-                // Immediately unlock audio on user gesture
-                unlockAudio();
-
-                // Play Cover Video safely
                 if (posterImage) posterImage.style.opacity = '0';
+
                 if (coverVideo) {
                     coverVideo.classList.remove('hidden');
                     coverVideo.muted = false;
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
-                        videoPromise.catch(() => dismissCover());
+                        videoPromise.catch(() => {
+                            dismissCover();
+                        });
                     }
                 } else {
                     dismissCover();
@@ -728,6 +765,7 @@
             if (sealClickArea) {
                 sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
                 sealClickArea.addEventListener('touchstart', handleUserInteraction, { passive: true, once: true });
+                sealClickArea.addEventListener('pointerdown', handleUserInteraction, { passive: true, once: true });
             }
 
             if (coverVideo) {
