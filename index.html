@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -85,13 +85,14 @@
         /* Section Title Style */
         .section-title {
             font-family: 'Aref Ruqaa', serif;
-            font-size: 1.35rem;
-            letter-spacing: 0.05em !important;
+            font-size: 1.75rem; /* 28px */
+            line-height: 1.3;
+            letter-spacing: 0.02em !important;
         }
 
         @media (min-width: 640px) {
             .section-title {
-                font-size: 1.55rem;
+                font-size: 2.15rem; /* ~34px */
             }
         }
 
@@ -177,6 +178,47 @@
             transform: translateY(0);
         }
 
+        /* Chandelier Shake Animation Keyframes */
+        @keyframes chandelierShakeKeyframes {
+            0% {
+                opacity: 0;
+                transform: translateY(-15px) rotate(0deg);
+            }
+            15% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            30% {
+                transform: translateY(0) rotate(5deg);
+            }
+            45% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            60% {
+                transform: translateY(0) rotate(3deg);
+            }
+            75% {
+                transform: translateY(0) rotate(-3deg);
+            }
+            90% {
+                transform: translateY(0) rotate(1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .chandelier-anim {
+            opacity: 0;
+            transform-origin: top center;
+            will-change: transform, opacity;
+        }
+
+        .chandelier-anim.active {
+            animation: chandelierShakeKeyframes 2.2s ease-in-out forwards;
+        }
+
         .delay-circle-1 { transition-delay: 0.08s; }
         .delay-circle-2 { transition-delay: 0.2s; }
         .delay-circle-3 { transition-delay: 0.32s; }
@@ -222,7 +264,7 @@
     <!-- FULLSCREEN COVER OVERLAY (STATIC POSTER + VIDEO) -->
     <div id="videoCover" class="fixed inset-0 z-50 flex items-center justify-center bg-[#eae3dc] overflow-hidden select-none">
         <!-- 1. INSTANT STATIC POSTER -->
-        <img id="posterImage" src="images/cover-poster.jpg" alt="غلاف الدعوة" class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300">
+        <img id="posterImage" src="images/cover-poster.jpg" alt="غلاف الدعوة" decoding="async" class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300">
 
         <!-- 2. VIDEO PLAYER -->
         <video id="coverVideo" playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true" preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
@@ -242,28 +284,29 @@
                 <source src="images/hero-bg.mp4" type="video/mp4">
             </video>
             
-            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#eae3dc]/80 z-0 pointer-events-none"></div>
+            <!-- GRADIENT OVERLAY WITH SMOOTH BLEND AT BOTTOM TO MATCH WELCOME SECTION -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent via-60% to-[#eae3dc] z-0 pointer-events-none"></div>
 
             <!-- Content Wrapper -->
-            <div class="relative z-10 w-full max-w-xs mx-auto pt-12 sm:pt-16 flex flex-col items-center space-y-6">
+            <div class="relative z-10 w-full max-w-xs mx-auto pt-14 sm:pt-20 flex flex-col items-center space-y-5">
                 
                 <!-- 1. Monogram Logo -->
-                <div class="hero-reveal-1">
-                    <img src="images/monogram.png" alt="شعار الأسماء" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm">
+                <div class="hero-reveal-1 mt-2">
+                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
                 <!-- 2. Basmalah Image -->
                 <div class="hero-reveal-2 pt-1">
-                    <img src="images/basmalah.png" alt="بسم الله الرحمن الرحيم" class="w-52 sm:w-60 h-auto object-contain mx-auto filter drop-shadow-md brightness-110">
+                    <img src="images/basmalah.png" alt="بسم الله الرحمن الرحيم" decoding="async" class="w-52 sm:w-60 h-auto object-contain mx-auto filter drop-shadow-md brightness-110">
                 </div>
 
                 <!-- 3. Quran Verse Frame -->
-                <div class="hero-reveal-3 max-w-[260px] sm:max-w-[280px] mx-auto space-y-2 px-1 pt-1">
-                    <p class="font-free-calligraphy text-base sm:text-lg leading-relaxed text-[#856431] drop-shadow-sm font-semibold">
-                        ﴿وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِك لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾
+                <div class="hero-reveal-3 max-w-[240px] sm:max-w-[270px] mx-auto space-y-2 px-2 pt-1">
+                    <p class="font-naskh-extended text-xs sm:text-sm leading-relaxed text-[#856431] drop-shadow-sm font-bold tracking-normal">
+                        ﴿ وَمِـنْ آَيَـاتِـهِ أَنْ خَـلَـقَ لَـكُـمْ مِـنْ أَنْـفُـسِـكُـمْ أَزْوَاجًـا لِّـتَـسْـكُـنُـوا إِلَـيْـهَـا وَجَـعَـلَ بَـيْـنَـكُـمْ مَوَدَّةً وَرَحْـمَـةً ۚ إِنَّ فِي ذَٰلِـكَ لَآَيَـاتٍ لِّـقَـوْمٍ يَـتَـفَـكَّـرُونَ ﴾
                     </p>
-                    <p class="font-tajawal text-xs sm:text-sm text-[#856431]/85 font-semibold tracking-wide">
-                        سورة الروم، الآية (21)
+                    <p class="font-naskh-extended text-[11px] sm:text-xs text-[#856431]/85 font-semibold tracking-wide pt-1">
+                        ﴿ سُـورَةُ الـرُّومِ: ٢١ ﴾
                     </p>
                 </div>
 
@@ -277,113 +320,112 @@
             </div>
         </section>
 
-        <!-- WELCOME SECTION WITH CLEARER BACKGROUND IMAGE -->
-        <section id="welcomeSection" class="relative z-20 w-full min-h-[520px] py-14 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
+        <!-- WELCOME SECTION WITH SMOOTH BLENDING AT TOP -->
+        <section id="welcomeSection" class="relative z-20 w-full min-h-[540px] py-14 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
             <!-- Background Image -->
-            <img src="images/welcome-bg.png" alt="خلفية الترحيب" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+            <img src="images/welcome-bg.png" alt="خلفية الترحيب" decoding="async" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
 
-            <!-- Light & Subtle Overlay Gradient for Enhanced Visibility of welcome-bg.png -->
-            <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc]/55 via-[#eae3dc]/30 to-[#eae3dc]/55 z-0 pointer-events-none"></div>
+            <!-- Top Smooth Gradient Fade to Blend Seamlessly with hero-bg -->
+            <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#eae3dc] via-[#eae3dc]/70 to-transparent z-0 pointer-events-none"></div>
 
-            <!-- Content Container Layer with Drop Shadows for Crisp Legibility -->
-            <div class="relative z-10 max-w-xs mx-auto space-y-5 flex flex-col items-center justify-center my-auto">
+            <!-- Bottom Smooth Gradient Fade to Blend Seamlessly with Next Section -->
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#eae3dc] via-[#eae3dc]/60 to-transparent z-0 pointer-events-none"></div>
+
+            <!-- Content Container Layer -->
+            <div class="relative z-10 max-w-sm mx-auto space-y-6 flex flex-col items-center justify-center my-auto">
                 <!-- Top Monogram Image -->
-                <div class="mb-1">
-                    <img src="images/monogram.png" alt="شعار الأسماء" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm">
+                <div>
+                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
-                <!-- Modern Naskh Text Block With Kashida Extended Flourishes -->
-                <div class="font-naskh-extended space-y-2.5 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                    <!-- Stanza 1 -->
-                    <div class="space-y-0.5">
-                        <p class="text-base sm:text-lg font-bold text-gold-700 leading-snug">
-                            قـد كـتـب لـنـوفـمـبـر أَن يـكـون
-                        </p>
-                        <p class="text-base sm:text-lg font-bold text-gold-700 leading-snug">
-                            اسـتـثـنـائـيــاً هـذا الـعـام
-                        </p>
-                    </div>
-
-                    <!-- Stanza 2 & Date -->
-                    <div class="space-y-0.5 pt-1">
-                        <p class="text-xs sm:text-sm font-bold text-bronze leading-relaxed">
-                            فـفـيــه تـكـتـمــل فـرحـتـنـا
-                        </p>
-                        <p class="text-base sm:text-lg font-bold text-gold-700 dir-ltr tracking-wider">
-                            14.11.2026
-                        </p>
-                    </div>
-
-                    <!-- Stanza 3 (Poetic Verses) -->
-                    <div class="space-y-0.5 pt-1">
-                        <p class="text-xs sm:text-sm font-bold text-bronze leading-relaxed">
-                            مـا بـيـن صـدفـة جـمـعـت الـطـرق
-                        </p>
-                        <p class="text-xs sm:text-sm font-bold text-bronze leading-relaxed">
-                            وقـدر رتــب الـلـقــاء
-                        </p>
-                        <p class="text-xs sm:text-sm font-bold text-bronze leading-relaxed">
-                            كـتـبــت حـكـايـة
-                        </p>
-                        <p class="text-xs sm:text-sm font-bold text-bronze leading-relaxed">
-                            كـان لـلـحـب فـيـهـا
-                        </p>
-                        <p class="text-base sm:text-lg font-bold text-gold-700 leading-relaxed pt-0.5">
-                            أجـمــل بـدايـة
-                        </p>
-                    </div>
+                <!-- Text Block 1: Intro Verses -->
+                <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                    <p>قد كُتب لنُوفمبَــــــر أنّ يَكون َ</p>
+                    <p>استِثنائيــــــــاً هــذا العــــام</p>
+                    <p>فَفِيــهِ تَكتمِـــــل فَرحتُنــــــا</p>
                 </div>
 
+                <!-- Highlighted Date -->
+                <div class="py-1">
+                    <span class="font-naskh-extended text-lg sm:text-xl font-bold text-gold-700 tracking-widest dir-ltr inline-block drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                        14.11.2026
+                    </span>
+                </div>
+
+                <!-- Text Block 2: Story Verses -->
+                <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                    <p>ما بَين صُدفـــةٍ جَمعَـت الطُرق</p>
+                    <p>وقَدرٍ رَتّب اللِقاء ، كُتِبت حِكايَة</p>
+                    <p>كانَ للحٌبِ فينا أجمَل بدايــــــة</p>
+                </div>
+
+                <!-- Divider Image -->
                 <div class="flex items-center justify-center pt-2">
-                    <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-85">
+                    <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-36 h-auto object-contain opacity-85">
                 </div>
             </div>
         </section>
 
-        <!-- INVITATION CARD SECTION (NAMES CALLIGRAPHY WITH CLOUDS BACKGROUND) -->
-        <section id="invitationCard" class="pb-12 pt-8 px-6 sm:px-8 text-center bg-[#eae3dc] relative flex flex-col items-center justify-center overflow-hidden reveal z-20">
-            <!-- Background Clouds Layer (Soft & Transparent Appearance) -->
-            <img src="images/clouds.png" alt="غيوم الخلفية" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply pointer-events-none z-0">
-
-            <!-- Soft Top and Bottom Gradient Blends -->
-            <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc]/80 via-transparent to-[#eae3dc]/80 pointer-events-none z-0"></div>
+        <!-- INVITATION CARD SECTION -->
+        <section id="invitationCard" class="pb-12 pt-10 px-6 sm:px-8 text-center bg-[#eae3dc] relative flex flex-col items-center justify-center overflow-hidden reveal z-20">
+            <!-- Transparent Floral Background Image -->
+            <img src="images/names-bg.png" alt="خلفية الأسماء" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
             <!-- Main Content Container -->
-            <div class="relative z-10 space-y-6 max-w-sm mx-auto flex flex-col items-center">
-                <div class="space-y-1.5 text-gold-700 font-tajawal font-medium w-full">
-                    <p class="text-xs sm:text-sm font-semibold text-gold-600/90 tracking-wide">بكل حب ومودة</p>
-                    <p class="text-xs sm:text-sm text-gold-700/80">تتشرف</p>
-                    
-                    <!-- Families Names Side by Side Horizontally -->
-                    <div class="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold pt-1 whitespace-nowrap">
-                        <span>عائلة السيد غسان صالح</span>
-                        <span class="text-gold-700/80 font-normal px-0.5">و</span>
-                        <span>عائلة السيد وليد عز الدين</span>
-                    </div>
+            <div class="relative z-10 space-y-6 max-w-sm mx-auto flex flex-col items-center w-full">
+                
+                <!-- Intro Phrases -->
+                <div class="space-y-1 text-gold-700 font-tajawal w-full font-normal text-xs sm:text-sm">
+                    <p class="tracking-wide">بكل حب ومودة</p>
+                    <p class="tracking-wide">تتشرف</p>
+                </div>
 
-                    <p class="text-xs sm:text-sm text-gold-700/80 pt-1 font-medium">بدعوتكم لحضور حفل زفاف نجليهما</p>
+                <!-- Families Names - Two Columns Layout -->
+                <div class="grid grid-cols-2 gap-3 text-gold-700 font-tajawal w-full max-w-[340px] mx-auto py-1 items-start">
+                    <!-- Family 1 -->
+                    <div class="flex flex-col items-center">
+                        <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
+                        <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد غسان صالح</span>
+                    </div>
+                    <!-- Family 2 -->
+                    <div class="flex flex-col items-center">
+                        <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
+                        <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد وليد عز الدين</span>
+                    </div>
+                </div>
+
+                <!-- Invitation Text -->
+                <div>
+                    <p class="text-xs sm:text-sm font-normal text-gold-700 font-tajawal tracking-wide">
+                        بدعوتكم لحضور حفل نجليهما
+                    </p>
                 </div>
 
                 <!-- CALLIGRAPHY IMAGE FOR COUPLE NAMES -->
                 <div class="py-2 flex justify-center items-center w-full">
-                    <img src="images/names.png" alt="مخطوطة أسماء العروسين عمر وسوزان" class="w-52 sm:w-60 h-auto object-contain drop-shadow-sm">
+                    <img src="images/names.png" alt="مخطوطة أسماء العروسين عمر وسوزان" decoding="async" class="w-56 sm:w-64 h-auto object-contain drop-shadow-sm">
                 </div>
 
-                <div class="space-y-1.5 text-sm sm:text-base font-tajawal text-bronze/90 leading-relaxed font-normal">
-                    <p class="text-gold-700 font-semibold">وذلك بمشيئة الله</p>
-                    <p class="pt-1 font-bold text-bronze text-base">يوم السبت</p>
-                    <p class="font-bold text-gold-700 text-lg dir-ltr">14.11.2026</p>
-                    <p class="pt-2 text-bronze/85 text-xs sm:text-sm">حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا.</p>
+                <!-- Date & Details -->
+                <div class="space-y-2 text-gold-700 font-tajawal w-full">
+                    <p class="text-sm sm:text-base font-medium">وذلك بمشيئة الله</p>
+                    <p class="text-base sm:text-lg font-bold pt-0.5">يوم السبت</p>
+                    <p class="text-lg sm:text-xl font-extrabold tracking-widest dir-ltr">14 . 11 . 2026</p>
+                    <p class="text-sm sm:text-base font-medium pt-3 leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
+                        حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا
+                    </p>
                 </div>
+
             </div>
         </section>
 
         <!-- COUNTDOWN TIMER SECTION -->
         <section class="pt-6 pb-4 px-0 text-center bg-[#eae3dc] flex flex-col items-center justify-center">
             <div class="reveal space-y-2 mb-8 px-4">
-                <p class="section-title text-gold-700 font-bold">الوقت المتبقي</p>
+                <h2 class="section-title text-gold-700 font-bold">الوقت المتبقي</h2>
                 <div class="flex items-center justify-center pt-1 px-4">
-                    <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-75">
+                    <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                 </div>
             </div>
 
@@ -434,7 +476,7 @@
             </div>
 
             <div class="w-full mt-10 reveal leading-none">
-                <img src="images/drape.png" alt="زخرفة كريستال" class="w-full h-auto block object-cover">
+                <img src="images/drape.png" alt="زخرفة كريستال" decoding="async" class="w-full h-auto block object-cover">
             </div>
         </section>
 
@@ -442,14 +484,14 @@
         <section id="details" class="py-14 px-6 bg-[#eae3dc] text-center reveal">
             <div class="max-w-xs mx-auto space-y-6">
                 <div class="space-y-2">
-                    <p class="section-title text-gold-700 font-bold">موقع الحفل</p>
+                    <h2 class="section-title text-gold-700 font-bold">موقع الحفل</h2>
                     <div class="flex items-center justify-center">
-                        <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-75">
+                        <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                     </div>
                 </div>
 
                 <div class="w-full my-4 flex items-center justify-center">
-                    <img src="images/venue.png" alt="فندق بالازو فيرساتشي" class="w-full max-w-[320px] h-auto object-contain">
+                    <img src="images/venue.png" alt="فندق بالازو فيرساتشي" decoding="async" class="w-full max-w-[320px] h-auto object-contain">
                 </div>
 
                 <div class="space-y-2 text-sm text-bronze/90 font-tajawal">
@@ -457,7 +499,7 @@
                     <p class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
                 </div>
 
-                <div class="pt-3 flex flex-col gap-3 max-w-[230px] mx-auto">
+                <div class="pt-3 flex flex-col items-center gap-3 max-w-[260px] mx-auto">
                     <a href="https://maps.google.com/?q=Palazzo+Versace+Dubai+Al+Jaddaf" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
                         موقع القاعة (Map)
                     </a>
@@ -465,42 +507,34 @@
                         <i data-lucide="calendar-plus" class="w-4 h-4"></i>
                         إضافة للتقويم
                     </a>
+
+                    <!-- ENLARGED & OPTIMIZED ADULTS ONLY IMAGE -->
+                    <div class="pt-4 w-full flex justify-center items-center">
+                        <img src="images/adults-only.png" alt="للكبار فقط" decoding="async" class="w-52 sm:w-64 max-w-full h-auto object-contain filter drop-shadow-sm opacity-95 transition-transform duration-300 hover:scale-105">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- DRESS CODE & NOTES SECTION -->
-        <section id="dressCode" class="py-10 px-6 bg-[#eae3dc] text-center reveal">
-            <div class="max-w-xs mx-auto space-y-6">
-                <!-- الزي الرسمي -->
-                <div class="space-y-3">
-                    <div class="space-y-2">
-                        <p class="section-title text-gold-700 font-bold">الزي الرسمي</p>
-                        <div class="flex items-center justify-center">
-                            <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-75">
-                        </div>
-                    </div>
-                    <p class="text-sm sm:text-base font-bold text-gold-700 font-tajawal">
-                        البدلات الرسمية | فساتين السهرة
-                    </p>
-                </div>
+        <!-- DRESS CODE DECOR & CHANDELIER SECTION -->
+        <section id="dressCode" class="pt-0 pb-6 px-0 bg-[#eae3dc] text-center w-full overflow-hidden flex flex-col items-center relative">
+            
+            <!-- 1. MERGED CHANDELIER (SHIFTED DOWN TO OVERLAP DRESSCODE DECOR) -->
+            <div class="relative z-20 -mb-16 sm:-mb-20 flex justify-center items-center w-full px-6">
+                <img id="chandelierImg" src="images/chandelier.png" alt="ثريا الكريستال" decoding="async" class="chandelier-anim w-48 sm:w-56 h-auto object-contain filter drop-shadow-md">
+            </div>
 
-                <!-- قسم بمحبة -->
-                <div class="space-y-3 pt-2">
-                    <div class="space-y-2">
-                        <p class="section-title text-gold-700 font-bold">بمحبة</p>
-                        <div class="flex items-center justify-center">
-                            <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-75">
-                        </div>
-                    </div>
-
-                    <p class="text-xs sm:text-sm text-bronze/90 leading-relaxed font-tajawal px-1 font-normal">
-                        لتكتمل فرحتنا بأجواء أنيقة وهادئة، يُرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
-                    </p>
-
-                    <p class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal pt-1">
-                        مع كل الحب،
-                    </p>
+            <!-- 2. DRESS CODE DECOR IMAGE -->
+            <div class="w-full mx-auto reveal relative z-10">
+                <div class="relative w-full overflow-hidden flex flex-col justify-center items-center py-0 my-0">
+                    <!-- Fade Overlay Mask Top & Bottom for Smooth Background Blending -->
+                    <div class="absolute inset-0 pointer-events-none z-10 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc]"></div>
+                    
+                    <!-- Full Width Image -->
+                    <img src="images/dresscode-decor.png" 
+                         alt="زخرفة الزي الرسمي" 
+                         decoding="async"
+                         class="w-full h-auto object-cover opacity-90 relative z-0">
                 </div>
             </div>
         </section>
@@ -509,9 +543,9 @@
         <section id="rsvp" class="py-8 px-6 bg-[#eae3dc] reveal">
             <div class="max-w-[300px] mx-auto space-y-5">
                 <div class="text-center space-y-2">
-                    <p class="section-title text-gold-700 font-bold">تأكيد الحضور</p>
+                    <h2 class="section-title text-gold-700 font-bold">تأكيد الحضور</h2>
                     <div class="flex items-center justify-center">
-                        <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-75">
+                        <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                     </div>
                 </div>
 
@@ -563,26 +597,23 @@
             </div>
         </section>
 
-        <!-- CLOUDS & FINAL CLOSING SECTION -->
+        <!-- CLOUDS & FINAL CLOSING SECTION WITH MONOGRAM -->
         <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px]">
             <!-- Background Clouds Image -->
-            <img src="images/clouds.png" alt="غيوم" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
+            <img src="images/clouds.png" alt="غيوم" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
 
             <!-- Top Smooth Fade Overlay from #eae3dc -->
             <div class="clouds-fade-top"></div>
 
-            <div class="relative z-10 space-y-3 max-w-xs mx-auto flex flex-col items-center">
+            <div class="relative z-10 space-y-5 max-w-xs mx-auto flex flex-col items-center">
                 <p class="text-xl sm:text-2xl text-gold-700 font-free-calligraphy leading-relaxed pt-2 font-bold">
                     حضوركم هو أجمل هدية تزيّن بداية رحلتنا
                 </p>
 
-                <div class="flex items-center justify-center py-1">
-                    <img src="images/divider.png" alt="فاصل زخرفي" class="w-32 h-auto object-contain opacity-80">
+                <!-- FOOTER MONOGRAM LOGO -->
+                <div class="pt-1">
+                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm opacity-90">
                 </div>
-
-                <p class="text-xs sm:text-sm text-gold-700/90 font-bold font-tajawal uppercase">
-                    14 . 11 . 2026
-                </p>
             </div>
         </section>
 
@@ -627,7 +658,7 @@
 
                 // 1. Play Background Music
                 if (bgMusic) {
-                    bgMusic.play().catch(err => console.log("Audio play prevented:", err));
+                    bgMusic.play().catch(err => console.warn("Audio play prevented:", err));
                 }
 
                 // 2. Play Cover Video
@@ -666,7 +697,21 @@
 
             revealElements.forEach(el => observer.observe(el));
 
-            // Countdown Timer Logic
+            // Chandelier Animation Observer
+            const chandelierImg = document.getElementById('chandelierImg');
+            if (chandelierImg) {
+                const chandelierObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            chandelierObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                chandelierObserver.observe(chandelierImg);
+            }
+
+            // Countdown Timer Logic (Memory Leak Protected)
             const eventDate = new Date('November 14, 2026 19:30:00').getTime();
             const circumference = 226.19;
 
@@ -680,6 +725,8 @@
             const minutesCircle = document.getElementById('minutesCircle');
             const secondsCircle = document.getElementById('secondsCircle');
 
+            let countdownInterval = null;
+
             function updateCountdown() {
                 const now = Date.now();
                 const difference = eventDate - now;
@@ -689,7 +736,16 @@
                     if (hoursEl) hoursEl.innerText = '00';
                     if (minutesEl) minutesEl.innerText = '00';
                     if (secondsEl) secondsEl.innerText = '00';
-                    clearInterval(countdownInterval);
+
+                    if (daysCircle) daysCircle.style.strokeDashoffset = circumference;
+                    if (hoursCircle) hoursCircle.style.strokeDashoffset = circumference;
+                    if (minutesCircle) minutesCircle.style.strokeDashoffset = circumference;
+                    if (secondsCircle) secondsCircle.style.strokeDashoffset = circumference;
+
+                    if (countdownInterval) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                    }
                     return;
                 }
 
@@ -709,7 +765,7 @@
                 if (secondsCircle) secondsCircle.style.strokeDashoffset = circumference - (seconds / 60) * circumference;
             }
 
-            const countdownInterval = setInterval(updateCountdown, 1000);
+            countdownInterval = setInterval(updateCountdown, 1000);
             updateCountdown();
 
             // Dynamic Calendar Link Setup
