@@ -58,6 +58,7 @@
         html, body {
             width: 100%;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             min-height: 100dvh;
             margin: 0;
             padding: 0;
@@ -67,6 +68,7 @@
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         input, textarea, button, a, select {
@@ -108,6 +110,8 @@
         #videoCover {
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
             will-change: opacity, visibility;
+            height: 100vh;
+            height: 100dvh;
         }
         #videoCover.fade-out {
             opacity: 0;
@@ -218,15 +222,15 @@
         }
     </style>
 </head>
-<body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100dvh] sm:py-6 font-tajawal select-none">
+<body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100vh] min-h-[100dvh] sm:py-6 font-tajawal select-none">
 
-    <!-- BACKGROUND MUSIC (started only from a real tap; see script below) -->
+    <!-- BACKGROUND MUSIC -->
     <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
         <source src="images/music.mp3" type="audio/mpeg">
         <source src="images/music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- MUSIC ON/OFF BUTTON (fallback if a browser still blocks autoplay) -->
+    <!-- MUSIC ON/OFF BUTTON -->
     <button id="musicToggle" type="button" aria-label="تشغيل / إيقاف الموسيقى" aria-pressed="false"
         style="position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:40;width:42px;height:42px;border-radius:9999px;border:1px solid rgba(184,146,82,.5);background:rgba(243,239,230,.88);color:#6b5132;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0;pointer-events:none;transition:opacity .5s ease;">
         <svg id="musicIconOn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
@@ -251,12 +255,12 @@
     <div class="w-full max-w-[430px] bg-[#eae3dc] sm:rounded-[40px] shadow-2xl overflow-hidden relative flex flex-col my-auto border-0 sm:border border-gold-200/50">
 
         <!-- HERO FULLSCREEN BACKGROUND VIDEO SECTION -->
-        <section id="heroSection" class="relative w-full h-[100dvh] min-h-[580px] sm:min-h-[720px] flex flex-col justify-between items-center text-center overflow-hidden pb-6 px-6">
+        <section id="heroSection" class="relative w-full h-[100vh] h-[100dvh] min-h-[580px] sm:min-h-[720px] flex flex-col justify-between items-center text-center overflow-hidden pb-[calc(1.5rem+env(safe-area-inset-bottom))] px-6">
             <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
                 <source src="images/hero-bg.mp4" type="video/mp4">
             </video>
             
-            <!-- GRADIENT OVERLAY WITH SMOOTH BLEND AT BOTTOM TO MATCH WELCOME SECTION -->
+            <!-- GRADIENT OVERLAY -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent via-60% to-[#eae3dc] z-0 pointer-events-none"></div>
 
             <!-- Content Wrapper -->
@@ -292,7 +296,7 @@
             </div>
         </section>
 
-        <!-- WELCOME SECTION WITH SMOOTH BLENDING AT TOP -->
+        <!-- WELCOME SECTION -->
         <section id="welcomeSection" class="relative z-20 w-full min-h-[500px] py-12 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
             <!-- Background Image -->
             <img src="images/welcome-bg.png" alt="خلفية الترحيب" decoding="async" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
@@ -305,33 +309,28 @@
 
             <!-- Content Container Layer -->
             <div class="relative z-10 max-w-sm mx-auto space-y-5 flex flex-col items-center justify-center my-auto">
-                <!-- Top Monogram Image -->
                 <div>
                     <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
-                <!-- Text Block 1: Intro Verses -->
                 <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>قد كُتب لنُوفمبَــــــر أنّ يَكون َ</p>
                     <p>استِثنائيــــــــاً هــذا العــــام</p>
                     <p>فَفِيــهِ تَكتمِـــــل فَرحتُنــــــا</p>
                 </div>
 
-                <!-- Highlighted Date -->
                 <div class="py-1">
                     <span class="font-naskh-extended text-lg sm:text-xl font-bold text-gold-700 tracking-widest dir-ltr inline-block drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                         14.11.2026
                     </span>
                 </div>
 
-                <!-- Text Block 2: Story Verses -->
                 <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>ما بَين صُدفـــةٍ جَمعَـت الطُرق</p>
                     <p>وقَدرٍ رَتّب اللِقاء ، كُتِبت حِكايَة</p>
                     <p>كانَ للحٌبِ فيها أجمَل بدايــــــة</p>
                 </div>
 
-                <!-- Divider Image -->
                 <div class="flex items-center justify-center pt-1">
                     <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-36 h-auto object-contain opacity-85">
                 </div>
@@ -340,46 +339,37 @@
 
         <!-- INVITATION CARD SECTION -->
         <section id="invitationCard" class="pb-12 pt-10 px-6 sm:px-8 text-center bg-[#eae3dc] relative flex flex-col items-center justify-center overflow-hidden reveal z-20">
-            <!-- Transparent Floral Background Image -->
             <img src="images/names-bg.png" alt="خلفية الأسماء" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
-            <!-- Main Content Container -->
             <div class="relative z-10 space-y-5 max-w-sm mx-auto flex flex-col items-center w-full">
                 
-                <!-- Intro Phrases -->
                 <div class="space-y-1 text-gold-700 font-tajawal w-full font-normal text-xs sm:text-sm">
                     <p class="tracking-wide">بكل حب ومودة</p>
                     <p class="tracking-wide">تتشرف</p>
                 </div>
 
-                <!-- Families Names - Two Columns Layout -->
                 <div class="grid grid-cols-2 gap-3 text-gold-700 font-tajawal w-full max-w-[340px] mx-auto py-1 items-start">
-                    <!-- Family 1 -->
                     <div class="flex flex-col items-center">
                         <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
                         <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد غسان صالح</span>
                     </div>
-                    <!-- Family 2 -->
                     <div class="flex flex-col items-center">
                         <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
                         <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد وليد عز الدين</span>
                     </div>
                 </div>
 
-                <!-- Invitation Text -->
                 <div>
                     <p class="text-xs sm:text-sm font-normal text-gold-700 font-tajawal tracking-wide">
                         بدعوتكم لحضور حفل نجليهما
                     </p>
                 </div>
 
-                <!-- CALLIGRAPHY IMAGE FOR COUPLE NAMES -->
                 <div class="py-2 flex justify-center items-center w-full">
                     <img src="images/names.png" alt="مخطوطة أسماء العروسين عمر وسوزان" decoding="async" class="w-56 sm:w-64 h-auto object-contain drop-shadow-sm">
                 </div>
 
-                <!-- Date & Details -->
                 <div class="space-y-2 text-gold-700 font-tajawal w-full">
                     <p class="text-sm sm:text-base font-medium">وذلك بمشيئة الله</p>
                     <p class="text-base sm:text-lg font-bold pt-0.5">يوم السبت</p>
@@ -403,24 +393,24 @@
                     </div>
                 </div>
 
-                <!-- 1. VENUE IMAGE -->
+                <!-- VENUE IMAGE -->
                 <div class="w-full my-2 flex items-center justify-center">
                     <img src="images/venue.png" alt="فندق بالازو فيرساتشي" decoding="async" class="w-full h-auto object-contain rounded-2xl shadow-sm">
                 </div>
 
-                <!-- 2. VENUE NAME & ADDRESS -->
+                <!-- VENUE NAME & ADDRESS -->
                 <div class="space-y-1 text-sm text-bronze/90 font-tajawal py-1">
                     <p class="font-bold text-base sm:text-lg text-gold-700">فندق بالازو فيرساتشي</p>
                     <p class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
                 </div>
 
-                <!-- 3. EMBEDDED GOOGLE MAP -->
+                <!-- EMBEDDED GOOGLE MAP -->
                 <div class="w-full my-2 flex items-center justify-center">
                     <div class="relative w-full max-w-[310px] aspect-square rounded-[32px] overflow-hidden shadow-md flex items-center justify-center bg-[#eae3dc]">
-                        <div class="absolute inset-[3%] rounded-[28px] overflow-hidden">
+                        <div class="absolute inset-[3%] rounded-[28px] overflow-hidden z-0">
                             <iframe 
                                 title="خريطة موقع الحفل"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.52989182379!2d55.3283282!3d25.2190886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d4750bd729f%3A0xb24933a38caed9b6!2sPalazzo%20Versace%20Dubai!5e0!3m2!1sar!2sae!4v1700000000000!5m2!1sar!2sae" 
+                                src="https://maps.google.com/maps?q=25.2271777,55.3418506&hl=ar&z=16&output=embed" 
                                 class="w-full h-full border-0 grayscale-[20%] contrast-[105%]" 
                                 allowfullscreen="" 
                                 loading="lazy" 
@@ -433,22 +423,20 @@
 
                 <!-- Action Buttons -->
                 <div class="pt-2 flex flex-col items-center gap-3 max-w-[260px] mx-auto">
-                    <a href="https://maps.google.com/?q=Palazzo+Versace+Dubai+Al+Jaddaf" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=25.2271777,55.3418506" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
                         موقع القاعة (Map)
                     </a>
-                    <a id="addToCalendar" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-4 text-gold-700/90 hover:text-gold-700 rounded-full text-center text-xs sm:text-sm font-bold font-tajawal transition flex items-center justify-center gap-1.5">
+                    <button id="addToCalendar" type="button" class="w-full py-2 px-4 text-gold-700/90 hover:text-gold-700 rounded-full text-center text-xs sm:text-sm font-bold font-tajawal transition flex items-center justify-center gap-1.5 cursor-pointer">
                         <i data-lucide="calendar-plus" class="w-4 h-4"></i>
                         إضافة للتقويم
-                    </a>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- COUNTDOWN TIMER SECTION -->
         <section id="countdownSection" class="relative pt-12 pb-8 px-0 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal z-20">
-            
             <div class="relative z-10 w-full flex flex-col items-center">
-                <!-- CLOCK ILLUSTRATION -->
                 <div class="w-full flex justify-center items-center mb-3">
                     <img src="images/clock.png" alt="ساعة كلاسيكية" decoding="async" class="w-36 sm:w-44 h-auto object-contain drop-shadow-md">
                 </div>
@@ -516,12 +504,10 @@
         <section id="rsvp" class="py-10 px-6 bg-[#eae3dc] reveal z-10">
             <div class="max-w-[320px] mx-auto space-y-5">
                 
-                <!-- DIVIDER ABOVE NOTICE TEXT -->
                 <div class="flex items-center justify-center pt-2">
                     <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
                 </div>
 
-                <!-- NOTICE TEXT -->
                 <div class="text-center px-2 py-1 space-y-2">
                     <p class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
                         لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
@@ -531,49 +517,35 @@
                     </p>
                 </div>
 
-                <!-- CHAIR IMAGE -->
                 <div class="w-full flex justify-center items-center pt-2">
                     <img src="images/chair.png" alt="كرسي الزفاف" decoding="async" class="w-24 sm:w-28 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
-                <!-- RSVP TITLE -->
                 <div class="text-center space-y-1">
                     <p class="font-free-calligraphy text-base sm:text-lg text-rsvpDark/80">سرور حضورك</p>
                     <h2 class="section-title text-2xl sm:text-3xl text-rsvpDark tracking-tight">يرجى تأكيد الحضور</h2>
                 </div>
 
-                <!-- Form Area -->
                 <form id="rsvpForm" class="space-y-4">
-                    
-                    <!-- NAME INPUT FIELD -->
                     <div class="space-y-1.5">
                         <div class="text-right space-y-0.5 pr-1">
-                            <label for="guestName" class="text-sm font-bold text-rsvpDark block">الاسم الكامل</label>
-                            <p class="text-xs text-rsvpDark/70">الاسم الثلاثي</p>
+                            <label for="guestName" class="text-sm font-bold text-rsvpDark block">الاسم</label>
                         </div>
                         <div class="relative flex items-center">
-                            <input type="text" id="guestName" name="guestName" required placeholder="اسمك الكريم" class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 pl-10 text-right text-sm text-rsvpDark placeholder-[#a19079] focus:outline-none focus:border-rsvpDark transition shadow-sm">
+                            <input type="text" id="guestName" name="guestName" required class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 pl-10 text-right text-sm text-rsvpDark focus:outline-none focus:border-rsvpDark transition shadow-sm">
                             <div class="absolute left-3.5 text-[#a19079] pointer-events-none">
                                 <i data-lucide="wallet" class="w-4 h-4"></i>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ATTENDANCE OPTIONS -->
                     <div class="space-y-2 pt-1">
-                        <div class="text-right space-y-0.5 pr-1">
-                            <span class="text-sm font-bold text-rsvpDark block">هل ستنضم إلينا؟</span>
-                            <p class="text-xs text-rsvpDark/70">هل ستحضر؟</p>
-                        </div>
-
                         <div class="space-y-2">
-                            <!-- Option 1: Attending -->
                             <label class="block relative cursor-pointer select-none">
                                 <input type="radio" id="attending" name="attendance" value="حضور" class="hidden rsvp-radio" checked>
                                 <div class="rsvp-card-option flex items-center justify-between p-3.5 rounded-xl">
                                     <div class="text-right">
                                         <p class="text-sm font-bold text-rsvpDark leading-tight">بكل سرور أقبل</p>
-                                        <p class="text-xs text-rsvpDark/70 mt-0.5">أقبل الدعوة</p>
                                     </div>
                                     <div class="radio-dot-outer w-5 h-5 rounded-full border border-[#8a7256] flex items-center justify-center flex-shrink-0 transition">
                                         <div class="radio-dot-inner w-2.5 h-2.5 rounded-full bg-rsvpDark opacity-0 scale-50 transition duration-200"></div>
@@ -581,13 +553,11 @@
                                 </div>
                             </label>
 
-                            <!-- Option 2: Declining -->
                             <label class="block relative cursor-pointer select-none">
                                 <input type="radio" id="declining" name="attendance" value="اعتذار" class="hidden rsvp-radio">
                                 <div class="rsvp-card-option flex items-center justify-between p-3.5 rounded-xl">
                                     <div class="text-right">
-                                        <p class="text-sm font-bold text-rsvpDark leading-tight">بأسف أعتذر</p>
-                                        <p class="text-xs text-rsvpDark/70 mt-0.5">أعتذر عن الحضور</p>
+                                        <p class="text-sm font-bold text-rsvpDark leading-tight">أعتذر عن الحضور</p>
                                     </div>
                                     <div class="radio-dot-outer w-5 h-5 rounded-full border border-[#8a7256] flex items-center justify-center flex-shrink-0 transition">
                                         <div class="radio-dot-inner w-2.5 h-2.5 rounded-full bg-rsvpDark opacity-0 scale-50 transition duration-200"></div>
@@ -597,11 +567,9 @@
                         </div>
                     </div>
 
-                    <!-- GUESTS COUNTER FIELD -->
                     <div class="space-y-1.5 pt-1">
                         <div class="text-right space-y-0.5 pr-1">
                             <span class="text-sm font-bold text-rsvpDark block">عدد المدعوين</span>
-                            <p class="text-xs text-rsvpDark/70">المدعوين المشمولين</p>
                         </div>
                         
                         <div class="flex items-center justify-between bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-2 px-4 shadow-sm">
@@ -615,11 +583,10 @@
                         </div>
                     </div>
 
-                    <!-- SUBMIT BUTTON -->
                     <div class="pt-3">
                         <button type="submit" class="w-full bg-[#6b5132] hover:bg-[#584127] active:scale-[0.98] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition duration-200 flex items-center justify-center gap-2 shadow-md">
                             <span>تأكيد</span>
-                            <i data-lucide="send" class="w-4 h-4 transform rotate-[45deg]"></i>
+                            <i data-lucide="send" class="w-4 h-4 transform -rotate-90"></i>
                         </button>
                     </div>
 
@@ -634,11 +601,8 @@
         </section>
 
         <!-- CLOUDS & FINAL CLOSING SECTION -->
-        <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px] z-10">
-            <!-- Background Clouds Image -->
+        <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px] z-10 pb-[calc(5rem+env(safe-area-inset-bottom))]">
             <img src="images/clouds.png" alt="غيوم" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
-
-            <!-- Top Smooth Fade Overlay -->
             <div class="clouds-fade-top"></div>
 
             <div class="relative z-10 space-y-5 max-w-xs mx-auto flex flex-col items-center">
@@ -646,7 +610,6 @@
                     حضوركم هو أجمل هدية تزيّن بداية رحلتنا
                 </p>
 
-                <!-- FOOTER MONOGRAM LOGO -->
                 <div class="pt-1">
                     <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm opacity-90">
                 </div>
@@ -655,10 +618,9 @@
 
     </div>
 
-    <!-- Optimized Scripts Block -->
+    <!-- Scripts Block -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Safe Lucide Icons Init
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
                 window.lucide.createIcons();
             }
@@ -674,10 +636,9 @@
             const iconOn = document.getElementById('musicIconOn');
             const iconOff = document.getElementById('musicIconOff');
 
-            let musicStarted = false;   // true once playback has really begun
-            let userPaused = false;     // true only if the guest turned music off
+            let musicStarted = false;
+            let userPaused = false;
 
-            // ---------- MUSIC ----------
             function updateMusicButton() {
                 const playing = !!bgMusic && !bgMusic.paused;
                 if (iconOn) iconOn.style.display = playing ? 'block' : 'none';
@@ -686,25 +647,24 @@
             }
 
             function startMusic() {
-                if (!bgMusic || userPaused || !bgMusic.paused) return;
+                if (!bgMusic || userPaused) return;
                 bgMusic.muted = false;
                 bgMusic.volume = 1;
                 const p = bgMusic.play();
                 if (p && typeof p.then === 'function') {
-                    p.then(() => { musicStarted = true; updateMusicButton(); })
-                     .catch(() => { updateMusicButton(); });
+                    p.then(() => { 
+                        musicStarted = true; 
+                        updateMusicButton(); 
+                    }).catch(() => { 
+                        updateMusicButton(); 
+                    });
                 }
             }
 
             if (bgMusic) {
                 bgMusic.addEventListener('play', updateMusicButton);
-                bgMusic.addEventListener('pause', () => {
-                    updateMusicButton();
-                    // Android may pause audio when another media starts or focus changes: resume.
-                    if (musicStarted && !userPaused && !document.hidden) {
-                        setTimeout(() => { if (bgMusic.paused && !userPaused) startMusic(); }, 400);
-                    }
-                });
+                bgMusic.addEventListener('pause', updateMusicButton);
+                
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden) {
                         if (!bgMusic.paused) bgMusic.pause();
@@ -728,19 +688,6 @@
                 });
             }
 
-            // Android only accepts audio started from "click"/"touchend" (NOT touchstart/pointerdown).
-            // Keep retrying on those gestures until the music is actually playing.
-            function retryOnGesture() {
-                startMusic();
-                if (musicStarted) {
-                    document.removeEventListener('click', retryOnGesture, true);
-                    document.removeEventListener('touchend', retryOnGesture, true);
-                }
-            }
-            document.addEventListener('click', retryOnGesture, true);
-            document.addEventListener('touchend', retryOnGesture, true);
-
-            // ---------- COVER ----------
             function triggerHeroSequence() {
                 if (heroSection) heroSection.classList.add('hero-revealed');
             }
@@ -753,30 +700,32 @@
                         musicToggle.style.opacity = '1';
                         musicToggle.style.pointerEvents = 'auto';
                     }
-                    startMusic(); // safety net; normally already playing
+                    startMusic();
                 }
             }
 
             let isInteractionHandled = false;
 
-            function handleUserInteraction() {
+            function handleUserInteraction(e) {
+                if (e) e.preventDefault();
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
-                // Start the music FIRST, directly inside the tap (valid user gesture).
                 startMusic();
 
                 if (posterImage) posterImage.style.opacity = '0';
 
                 if (coverVideo) {
-                    // Cover video must be muted: on Android an unmuted video steals audio focus
-                    // and pauses the background music. The music is the soundtrack.
                     coverVideo.muted = true;
                     coverVideo.setAttribute('muted', '');
                     coverVideo.classList.remove('hidden');
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
-                        videoPromise.catch(dismissCover);
+                        videoPromise.then(() => {
+                            // Video started playing smoothly
+                        }).catch(() => {
+                            dismissCover();
+                        });
                     }
                 } else {
                     dismissCover();
@@ -784,16 +733,13 @@
             }
 
             if (sealClickArea) {
-                // "click" is the reliable gesture on Android; "touchend" covers odd WebViews.
-                sealClickArea.addEventListener('click', handleUserInteraction);
-                sealClickArea.addEventListener('touchend', handleUserInteraction, { passive: true });
+                sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
             }
 
             if (coverVideo) {
                 coverVideo.addEventListener('ended', dismissCover);
             }
 
-            // Optimized IntersectionObserver
             const revealElements = document.querySelectorAll('.reveal');
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
@@ -810,7 +756,6 @@
                 revealElements.forEach(el => el.classList.add('active'));
             }
 
-            // Countdown Timer Logic
             const eventDate = new Date('November 14, 2026 19:30:00').getTime();
             const circumference = 226.19;
 
@@ -887,16 +832,56 @@
 
             window.addEventListener('beforeunload', stopCountdown);
 
-            // Dynamic Calendar Link Setup
+            /* UNIFIED & CROSS-PLATFORM CALENDAR INTEGRATION */
             const addToCalBtn = document.getElementById('addToCalendar');
             if (addToCalBtn) {
-                const calTitle = encodeURIComponent("حفل زفاف عمر & سوزان");
-                const calDetails = encodeURIComponent("نتشرف بحضوركم حفل زفافنا في فندق بالازو فيرساتشي – الجداف، دبي.");
-                const calLocation = encodeURIComponent("Palazzo Versace Dubai, Al Jaddaf, Dubai");
-                addToCalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=20261114T153000Z/20261114T200000Z&details=${calDetails}&location=${calLocation}`;
+                addToCalBtn.addEventListener('click', () => {
+                    const event = {
+                        title: "حفل زفاف عمر & سوزان",
+                        description: "نتشرف بحضوركم حفل زفافنا في فندق بالازو فيرساتشي – الجداف، دبي.",
+                        location: "Palazzo Versace Dubai, Al Jaddaf, Dubai",
+                        startDateUTC: "20261114T153000Z",
+                        endDateUTC: "20261114T195900Z"
+                    };
+
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    const isIOS = /iPad|iPhone|iPod/.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+                    if (isIOS) {
+                        const icsContent = [
+                            'BEGIN:VCALENDAR',
+                            'VERSION:2.0',
+                            'PRODID:-//Wedding Invitation//EN',
+                            'CALSCALE:GREGORIAN',
+                            'METHOD:PUBLISH',
+                            'BEGIN:VEVENT',
+                            `SUMMARY:${event.title}`,
+                            `DESCRIPTION:${event.description}`,
+                            `LOCATION:${event.location}`,
+                            `DTSTART:${event.startDateUTC}`,
+                            `DTEND:${event.endDateUTC}`,
+                            'STATUS:CONFIRMED',
+                            'END:VEVENT',
+                            'END:VCALENDAR'
+                        ].join('\r\n');
+
+                        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                        const link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.setAttribute('download', 'wedding-event.ics');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else {
+                        const calTitle = encodeURIComponent(event.title);
+                        const calDetails = encodeURIComponent(event.description);
+                        const calLocation = encodeURIComponent(event.location);
+                        const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=${event.startDateUTC}/${event.endDateUTC}&details=${calDetails}&location=${calLocation}`;
+                        window.open(googleCalUrl, '_blank');
+                    }
+                });
             }
 
-            // RSVP Counter Controller
             let currentGuestsCount = 2;
             const guestsDisplay = document.getElementById('guestsDisplay');
             const btnPlus = document.getElementById('btnPlus');
@@ -918,7 +903,6 @@
                 });
             }
 
-            // RSVP Form Action
             const rsvpForm = document.getElementById('rsvpForm');
             if (rsvpForm) {
                 rsvpForm.addEventListener('submit', function(e) {
