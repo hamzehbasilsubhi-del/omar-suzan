@@ -342,21 +342,23 @@
             <img src="images/names-bg.png" alt="خلفية الأسماء" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
-            <div class="relative z-10 space-y-5 max-w-sm mx-auto flex flex-col items-center w-full">
+            <div class="relative z-10 space-y-4 max-w-sm mx-auto flex flex-col items-center w-full">
                 
-                <div class="space-y-1 text-gold-700 font-tajawal w-full font-normal text-xs sm:text-sm">
+                <!-- INTRO TEXT (Cairo Font) -->
+                <div class="space-y-1 text-gold-700 font-cairo font-bold text-base sm:text-lg w-full">
                     <p class="tracking-wide">بكل حب ومودة</p>
                     <p class="tracking-wide">تتشرف</p>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3 text-gold-700 font-tajawal w-full max-w-[340px] mx-auto py-1 items-start">
+                <!-- FAMILY NAMES (Cairo Font) -->
+                <div class="grid grid-cols-2 gap-3 text-gold-700 font-cairo w-full max-w-[350px] mx-auto py-1 items-start">
                     <div class="flex flex-col items-center">
-                        <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
-                        <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد غسان صالح</span>
+                        <span class="text-xs sm:text-sm font-semibold text-gold-700/90 mb-0.5">عائلة</span>
+                        <span class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap">السيد غسان صالح</span>
                     </div>
                     <div class="flex flex-col items-center">
-                        <span class="text-xs sm:text-sm font-normal text-gold-700/90 mb-0.5">عائلة</span>
-                        <span class="text-base sm:text-lg font-bold tracking-tight whitespace-nowrap">السيد وليد عز الدين</span>
+                        <span class="text-xs sm:text-sm font-semibold text-gold-700/90 mb-0.5">عائلة</span>
+                        <span class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap">السيد وليد عز الدين</span>
                     </div>
                 </div>
 
@@ -366,15 +368,42 @@
                     </p>
                 </div>
 
-                <div class="py-2 flex justify-center items-center w-full">
+                <!-- NAMES MANUSCRIPT -->
+                <div class="py-1 flex justify-center items-center w-full">
                     <img src="images/names.png" alt="مخطوطة أسماء العروسين عمر وسوزان" decoding="async" class="w-56 sm:w-64 h-auto object-contain drop-shadow-sm">
                 </div>
 
-                <div class="space-y-2 text-gold-700 font-tajawal w-full">
+                <!-- "وذلك بمشيئة الله" -->
+                <div class="text-gold-700 font-tajawal">
                     <p class="text-sm sm:text-base font-medium">وذلك بمشيئة الله</p>
-                    <p class="text-base sm:text-lg font-bold pt-0.5">يوم السبت</p>
-                    <p class="text-lg sm:text-xl font-extrabold tracking-widest dir-ltr">14 . 11 . 2026</p>
-                    <p class="text-sm sm:text-base font-medium pt-3 leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
+                </div>
+
+                <!-- HORIZONTAL EVENT DETAILS WITHOUT BOXES/BACKGROUNDS -->
+                <div class="grid grid-cols-3 gap-2 w-full max-w-[340px] mx-auto pt-3 pb-2 items-end">
+                    
+                    <!-- 1. DAY ITEM -->
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-day.png" alt="اليوم" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">يوم السبت</span>
+                    </div>
+
+                    <!-- 2. DATE ITEM -->
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-date.png" alt="التاريخ" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span class="text-xs sm:text-sm font-extrabold text-gold-700 font-tajawal mt-2 tracking-wider dir-ltr whitespace-nowrap">14.11.2026</span>
+                    </div>
+
+                    <!-- 3. TIME ITEM -->
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-time.png" alt="الساعة" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">الساعة 7:00 م</span>
+                    </div>
+
+                </div>
+
+                <!-- CLOSING PHRASE -->
+                <div class="pt-2 text-gold-700 font-tajawal w-full">
+                    <p class="text-sm sm:text-base font-medium leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
                         حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا
                     </p>
                 </div>
@@ -410,7 +439,7 @@
                         <div class="absolute inset-[3%] rounded-[28px] overflow-hidden z-0">
                             <iframe 
                                 title="خريطة موقع الحفل"
-                                src="https://maps.google.com/maps?q=25.2271777,55.3418506&hl=ar&z=16&output=embed" 
+                                src="https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=ar&z=16&output=embed" 
                                 class="w-full h-full border-0 grayscale-[20%] contrast-[105%]" 
                                 allowfullscreen="" 
                                 loading="lazy" 
@@ -423,7 +452,8 @@
 
                 <!-- Action Buttons -->
                 <div class="pt-2 flex flex-col items-center gap-3 max-w-[260px] mx-auto">
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=25.2271777,55.3418506" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
+                    <!-- ACCURATE MAP LOCATION LINK TO PALAZZO VERSACE DUBAI -->
+                    <a href="https://maps.google.com/?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
                         موقع القاعة (Map)
                     </a>
                     <button id="addToCalendar" type="button" class="w-full py-2 px-4 text-gold-700/90 hover:text-gold-700 rounded-full text-center text-xs sm:text-sm font-bold font-tajawal transition flex items-center justify-center gap-1.5 cursor-pointer">
@@ -522,7 +552,6 @@
                 </div>
 
                 <div class="text-center space-y-1">
-                    <p class="font-free-calligraphy text-base sm:text-lg text-rsvpDark/80">سرور حضورك</p>
                     <h2 class="section-title text-2xl sm:text-3xl text-rsvpDark tracking-tight">يرجى تأكيد الحضور</h2>
                 </div>
 
@@ -722,7 +751,7 @@
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
                         videoPromise.then(() => {
-                            // Video started playing smoothly
+                            // Video playing
                         }).catch(() => {
                             dismissCover();
                         });
@@ -756,7 +785,7 @@
                 revealElements.forEach(el => el.classList.add('active'));
             }
 
-            const eventDate = new Date('November 14, 2026 19:30:00').getTime();
+            const eventDate = new Date('November 14, 2026 19:00:00').getTime();
             const circumference = 226.19;
 
             const daysEl = document.getElementById('days');
@@ -832,7 +861,7 @@
 
             window.addEventListener('beforeunload', stopCountdown);
 
-            /* UNIFIED & CROSS-PLATFORM CALENDAR INTEGRATION */
+            /* CALENDAR INTEGRATION */
             const addToCalBtn = document.getElementById('addToCalendar');
             if (addToCalBtn) {
                 addToCalBtn.addEventListener('click', () => {
@@ -840,8 +869,8 @@
                         title: "حفل زفاف عمر & سوزان",
                         description: "نتشرف بحضوركم حفل زفافنا في فندق بالازو فيرساتشي – الجداف، دبي.",
                         location: "Palazzo Versace Dubai, Al Jaddaf, Dubai",
-                        startDateUTC: "20261114T153000Z",
-                        endDateUTC: "20261114T195900Z"
+                        startDateUTC: "20261114T150000Z",
+                        endDateUTC: "20261114T190000Z"
                     };
 
                     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
