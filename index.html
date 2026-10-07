@@ -31,7 +31,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- Preconnect for Fast Google Maps Loading -->
     <link rel="preconnect" href="https://maps.google.com">
@@ -97,6 +97,7 @@
             font-family: 'Tajawal', sans-serif;
             color: #5c4a28;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -147,6 +148,48 @@
             text-transform: none !important;
         }
 
+        /* Unified Font Override for RSVP & Pre-RSVP in English Mode */
+        [dir="ltr"] #rsvp,
+        [dir="ltr"] #rsvp * {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        [dir="ltr"] #rsvp .section-title {
+            font-family: 'Playfair Display', serif !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+        }
+
+        [dir="ltr"] #rsvp p,
+        [dir="ltr"] #rsvp label,
+        [dir="ltr"] #rsvp input,
+        [dir="ltr"] #rsvp span,
+        [dir="ltr"] #rsvp button {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+        }
+
+        [dir="ltr"] #rsvp .rsvp-note-text {
+            font-size: 0.9rem !important;
+            line-height: 1.6 !important;
+            font-style: italic !important;
+        }
+
+        [dir="ltr"] #rsvp .with-love-text {
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            font-style: italic !important;
+        }
+
+        /* Footer Text English Font Family Override */
+        [dir="ltr"] .footer-text-en {
+            font-family: 'Playfair Display', serif !important;
+            font-style: italic !important;
+            font-weight: 500 !important;
+            font-size: 1.15rem !important;
+            line-height: 1.5 !important;
+        }
+
         /* Modern Typography Classes */
         .font-naskh-extended {
             font-family: 'Amiri', serif;
@@ -162,6 +205,16 @@
             font-style: italic;
         }
 
+        /* Closing Msg EN Custom Font Override (Cormorant Garamond) */
+        [dir="ltr"] .closing-msg-en {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            font-size: 1.25rem !important;
+            line-height: 1.5 !important;
+            letter-spacing: 0.02em !important;
+        }
+
         /* English Welcome Section Container & Lines Adjustments */
         [dir="ltr"] .welcome-poem-container {
             max-width: 320px !important;
@@ -173,15 +226,15 @@
         }
 
         [dir="ltr"] .welcome-poem-en {
-            font-family: 'Alex Brush', cursive !important;
-            font-size: 1.35rem !important;
-            line-height: 1.18 !important;
+            font-family: 'Playfair Display', serif !important;
+            font-size: 1.15rem !important;
+            line-height: 1.4 !important;
             font-weight: 500 !important;
-            font-style: normal !important;
+            font-style: italic !important;
             text-align: center !important;
         }
 
-        /* English Family Name Font */
+        /* English Family Name Font & Names Section Font Standard */
         [dir="ltr"] .family-container-english {
             display: flex;
             flex-direction: column;
@@ -190,11 +243,9 @@
             width: 100%;
         }
 
-        [dir="ltr"] .family-name-english {
+        [dir="ltr"] .family-name-english,
+        [dir="ltr"] .names-section-en {
             font-family: 'Cormorant Garamond', serif !important;
-            font-size: 1.25rem !important;
-            line-height: 1.3 !important;
-            font-weight: 600 !important;
             font-style: italic !important;
             letter-spacing: 0.02em !important;
         }
@@ -453,7 +504,7 @@
             <img src="images/names-bg.png" alt="Names Background" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
-            <div class="relative z-10 space-y-6 max-w-sm mx-auto flex flex-col items-center w-full">
+            <div class="relative z-10 space-y-5 max-w-sm mx-auto flex flex-col items-center w-full">
                 
                 <div data-i18n="invitationIntro" class="space-y-3 text-gold-700 font-naskh-extended font-bold text-lg sm:text-xl w-full leading-relaxed">
                     <p class="tracking-wide">بِكُلِّ حُبٍّ وَمَوَدَّةٍ</p>
@@ -513,7 +564,7 @@
                 </div>
 
                 <div class="pt-2 text-gold-700 font-tajawal w-full">
-                    <p data-i18n="closingMsg" class="text-sm sm:text-base font-medium leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
+                    <p data-i18n="closingMsg" class="text-sm sm:text-base font-medium leading-relaxed max-w-[300px] mx-auto text-gold-700/90">
                         حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا
                     </p>
                 </div>
@@ -644,10 +695,10 @@
                 </div>
 
                 <div class="text-center px-2 py-1 space-y-2">
-                    <p data-i18n="adultsOnly" class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
+                    <p data-i18n="adultsOnly" class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium rsvp-note-text">
                         لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
                     </p>
-                    <p data-i18n="withLove" class="text-xs font-bold text-gold-700 font-free-calligraphy pt-0.5">
+                    <p data-i18n="withLove" class="text-xs font-bold text-gold-700 font-free-calligraphy pt-0.5 with-love-text">
                         مع كل الحب،
                     </p>
                 </div>
@@ -740,7 +791,7 @@
             <div class="clouds-fade-top"></div>
 
             <div class="relative z-10 space-y-5 max-w-xs mx-auto flex flex-col items-center">
-                <p data-i18n="footerText" class="text-xl sm:text-2xl text-gold-700 font-free-calligraphy leading-relaxed pt-2 font-bold">
+                <p data-i18n="footerText" class="text-xl sm:text-2xl text-gold-700 font-free-calligraphy footer-text-en leading-relaxed pt-2 font-bold">
                     حضوركم هو أجمل هدية تزيّن بداية رحلتنا
                 </p>
 
@@ -756,7 +807,7 @@
 
     <!-- Scripts Block -->
     <script>
-        // UPDATED GOOGLE APP SCRIPT WEB APP URL
+        // GOOGLE APP SCRIPT WEB APP URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwzjjCVZwtKEz6456GhZJ423EaDE57SHzOFGkw7x8ADRLNuqns_FBffx-zvEZkUFvjQvQ/exec';
 
         // TRANSLATION DICTIONARY
@@ -804,13 +855,13 @@
                 verseSource: "( Surah Ar-Rum: 21 )",
                 welcomePoem1: "<p>November was destined to be extraordinary this year, for it is the month our joy becomes complete.</p>",
                 welcomePoem2: "<p>A beautiful coincidence crossed our paths, and destiny brought our hearts together.</p><p class='pt-1.5'>And so, our story was written - with love as its most beautiful beginning.</p>",
-                invitationIntro: "<p class='font-cormorant text-lg sm:text-xl italic text-gold-700 font-semibold'>With love and great joy,</p>",
+                invitationIntro: "<p class='names-section-en text-lg sm:text-xl text-gold-700 font-semibold'>With love and great joy,</p>",
                 familyPrefix1: "The family of",
                 family1: "Mr. Ghassan Saleh",
                 familyPrefix2: "The family of",
                 family2: "Mr. Walid Ezzeddine",
                 invitationSub: "cordially invite you to celebrate the wedding of",
-                godWilling: "God willing",
+                godWilling: "God willing,",
                 eventDay: "Saturday",
                 eventTime: "7:00 PM",
                 closingMsg: "Your presence will make our joy complete and our celebration all the more beautiful",
@@ -824,7 +875,7 @@
                 unitHours: "Hours",
                 unitMinutes: "Mins",
                 unitSeconds: "Secs",
-                adultsOnly: "To create an elegant and intimate celebration, we kindly ask that our evening be an adults-only occasion. Thank you for your understanding and for being part of these special moments with us",
+                adultsOnly: "To create an elegant and intimate celebration, we kindly ask that our evening be an adults-only occasion. Thank you for your understanding and for being part of these special moments with us.",
                 withLove: "With love,<br>Omar & Suzan",
                 rsvpTitle: "Kindly Confirm Your Attendance",
                 labelName: "Full Name",
@@ -873,7 +924,7 @@
                 el.innerText = lang === 'ar' ? 'EN' : 'عربي';
             });
 
-            // Switch Cover Poster & Video dynamically based on Language
+            // Switch Cover Poster & Video dynamically based on Language with Instant Reload Fix
             if (posterImage) {
                 posterImage.src = lang === 'ar' ? 'images/cover-poster.jpg' : 'images/cover-poster-en.jpg';
             }
@@ -902,15 +953,18 @@
                 if (monogramEn3) monogramEn3.style.display = 'block';
             }
 
-            // Layout adjust for family names on English safely
+            // Layout adjust for family names on English safely to keep side-by-side structure
             if (familyGridContainer) {
                 if (lang === 'en') {
-                    familyGridContainer.className = "flex flex-col items-center space-y-2 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2";
+                    familyGridContainer.className = "grid grid-cols-2 gap-2 sm:gap-4 text-gold-700 w-full max-w-[380px] mx-auto py-1 items-start text-center";
                     familyGridContainer.innerHTML = `
-                        <div class="family-container-english">
-                            <span class="family-name-english text-center"><span class="font-normal opacity-90">${i18nData.en.familyPrefix1}</span> ${i18nData.en.family1}</span>
-                            <span class="text-xs font-semibold italic text-gold-600/90 my-1">and</span>
-                            <span class="family-name-english text-center"><span class="font-normal opacity-90">${i18nData.en.familyPrefix2}</span> ${i18nData.en.family2}</span>
+                        <div class="flex flex-col items-center space-y-0.5">
+                            <span class="text-xs sm:text-sm font-normal text-gold-700/80 names-section-en">${i18nData.en.familyPrefix1}</span>
+                            <span class="family-name-english text-sm sm:text-base font-semibold text-gold-700">${i18nData.en.family1}</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-0.5">
+                            <span class="text-xs sm:text-sm font-normal text-gold-700/80 names-section-en">${i18nData.en.familyPrefix2}</span>
+                            <span class="family-name-english text-sm sm:text-base font-semibold text-gold-700">${i18nData.en.family2}</span>
                         </div>
                     `;
                 } else {
@@ -970,6 +1024,15 @@
                 const key = el.getAttribute('data-i18n');
                 if (data[key] !== undefined) {
                     el.innerHTML = data[key];
+                    if (lang === 'en') {
+                        if (['invitationIntro', 'invitationSub', 'godWilling'].includes(key)) {
+                            el.classList.add('names-section-en');
+                        } else if (key === 'closingMsg') {
+                            el.classList.add('closing-msg-en');
+                        }
+                    } else if (lang === 'ar') {
+                        el.classList.remove('names-section-en', 'closing-msg-en');
+                    }
                 }
             });
 
@@ -1082,6 +1145,7 @@
             let isInteractionHandled = false;
 
             function handleUserInteraction(e) {
+                if (e) e.preventDefault();
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
@@ -1093,6 +1157,10 @@
                     coverVideo.muted = true;
                     coverVideo.setAttribute('muted', '');
                     coverVideo.classList.remove('hidden');
+                    
+                    // Direct Event listener attachment to guarantee trigger
+                    coverVideo.onended = () => { dismissCover(); };
+
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
                         videoPromise.then(() => {}).catch(() => { dismissCover(); });
@@ -1104,7 +1172,6 @@
 
             if (sealClickArea) {
                 sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
-                sealClickArea.addEventListener('touchstart', handleUserInteraction, { once: true, passive: true });
             }
 
             if (coverVideo) {
