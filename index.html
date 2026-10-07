@@ -169,19 +169,19 @@
             margin-right: auto !important;
             padding-left: 0.75rem !important;
             padding-right: 0.75rem !important;
-            padding-top: 1.75rem !important; /* Move contents slightly downward */
+            padding-top: 1.75rem !important;
         }
 
         [dir="ltr"] .welcome-poem-en {
             font-family: 'Alex Brush', cursive !important;
             font-size: 1.35rem !important;
-            line-height: 1.18 !important; /* Reduced line height */
+            line-height: 1.18 !important;
             font-weight: 500 !important;
             font-style: normal !important;
             text-align: center !important;
         }
 
-        /* English Family Name Font (New Elegance Style) */
+        /* English Family Name Font */
         [dir="ltr"] .family-container-english {
             display: flex;
             flex-direction: column;
@@ -485,7 +485,7 @@
                     <!-- Vertical Handdrawn English Script Names -->
                     <div id="namesEnglish" class="hidden flex-col items-center justify-center space-y-0.5 my-2">
                         <span class="font-english-script text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Omar</span>
-                        <span class="font-english-script text-3xl sm:text-4xl text-gold-600 font-normal my-1">&</span>
+                        <span class="font-english-script text-3xl sm:text-4xl text-gold-600 font-normal my-1">&amp;</span>
                         <span class="font-english-script text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Suzan</span>
                     </div>
                 </div>
@@ -545,7 +545,7 @@
                         <div class="absolute inset-[3%] rounded-[28px] overflow-hidden z-0">
                             <iframe 
                                 title="Wedding Venue Map"
-                                src="https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=ar&z=16&output=embed" 
+                                src="https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&amp;hl=ar&amp;z=16&amp;output=embed" 
                                 id="mapIframe"
                                 class="w-full h-full border-0 grayscale-[20%] contrast-[105%]" 
                                 allowfullscreen="" 
@@ -756,8 +756,8 @@
 
     <!-- Scripts Block -->
     <script>
-        // GOOGLE APP SCRIPT WEB APP URL (UPDATED)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzmacjH2LzOt9kaNpIK99EkAoSA97j8a6h5b9Zz4R8--9jzfmzHpTbGZ8uiXE2tV2aNaA/exec';
+        // UPDATED GOOGLE APP SCRIPT WEB APP URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwzjjCVZwtKEz6456GhZJ423EaDE57SHzOFGkw7x8ADRLNuqns_FBffx-zvEZkUFvjQvQ/exec';
 
         // TRANSLATION DICTIONARY
         const i18nData = {
@@ -973,7 +973,7 @@
                 }
             });
 
-            // Update Map Language without unnecessary reload
+            // Update Map Language
             if (mapIframe) {
                 const targetSrc = `https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=${data.mapLang}&z=16&output=embed`;
                 if (mapIframe.src !== targetSrc) {
@@ -1266,7 +1266,6 @@
                 rsvpForm.addEventListener('submit', function(e) {
                     e.preventDefault();
 
-                    // Disable button and show loading state
                     if (submitBtn) {
                         submitBtn.disabled = true;
                         submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
@@ -1289,7 +1288,6 @@
                         })
                         .catch(error => {
                             console.error('Error submitting RSVP:', error);
-                            // Fallback display on error or network issues
                             rsvpForm.classList.add('hidden');
                             const thankYouMsg = document.getElementById('thankYouMessage');
                             if (thankYouMsg) thankYouMsg.classList.remove('hidden');
