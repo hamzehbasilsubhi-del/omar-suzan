@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>دعوة زفاف عمر & سوزان</title>
+    
+    <!-- Title for Browser Tab & Social Sharing -->
+    <title>A Beautiful Chapter Begins — Omar & Suzan | 14.11.2026</title>
+
+    <!-- Open Graph Meta Tags (WhatsApp, Facebook, LinkedIn, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Rawnaq Invitations">
+    <meta property="og:title" content="A Beautiful Chapter Begins — Omar & Suzan | 14.11.2026">
+    <meta property="og:description" content="يسعدنا ويشرفنا دعوتكم لحضور حفل زفافنا | We are honored to invite you to celebrate our wedding">
+    <meta property="og:image" content="https://rawnaq.pro/images/cover-poster.jpg">
+    <meta property="og:image:secure_url" content="https://rawnaq.pro/images/cover-poster.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Omar & Suzan Wedding Invitation">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Beautiful Chapter Begins — Omar & Suzan | 14.11.2026">
+    <meta name="twitter:description" content="يسعدنا ويشرفنا دعوتكم لحضور حفل زفافنا | We are honored to invite you to celebrate our wedding">
+    <meta name="twitter:image" content="https://rawnaq.pro/images/cover-poster.jpg">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +31,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Great+Vibes&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- Preconnect for Fast Google Maps Loading -->
     <link rel="preconnect" href="https://maps.google.com">
@@ -46,6 +66,13 @@
                         freeCalligraphy: ['"Aref Ruqaa"', 'serif'],
                         cairo: ['Cairo', 'sans-serif'],
                         sloop: ['"Great Vibes"', 'cursive'],
+                        pinyon: ['"Pinyon Script"', 'cursive'],
+                        parisienne: ['Parisienne', 'cursive'],
+                        alex: ['"Alex Brush"', 'cursive'],
+                        cormorant: ['"Cormorant Garamond"', 'serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -75,6 +102,11 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* English Mode Fonts Override */
+        [dir="ltr"] body {
+            font-family: 'Inter', 'Montserrat', sans-serif;
+        }
+
         input, textarea, button, a, select {
             -webkit-user-select: auto;
             user-select: auto;
@@ -84,13 +116,19 @@
             letter-spacing: normal !important;
         }
 
+        [dir="ltr"] body, [dir="ltr"] h1, [dir="ltr"] h2, [dir="ltr"] h3, [dir="ltr"] h4, [dir="ltr"] p, [dir="ltr"] span, [dir="ltr"] div, [dir="ltr"] a {
+            letter-spacing: 0.01em !important;
+        }
+
         .font-free-calligraphy {
             font-family: 'Aref Ruqaa', serif;
             letter-spacing: normal !important;
         }
 
-        .font-sloop {
-            font-family: 'Great Vibes', cursive;
+        [dir="ltr"] .font-free-calligraphy {
+            font-family: 'Alex Brush', cursive !important;
+            font-size: 1.35em;
+            line-height: 1.2;
         }
 
         /* Section Title Style */
@@ -99,15 +137,35 @@
             font-weight: 800;
             font-size: clamp(1.35rem, 5vw, 1.85rem);
             line-height: 1.3;
-            letter-spacing: 0.01em !important;
         }
 
-        /* Modern & Extended Naskh Typography Classes */
+        [dir="ltr"] .section-title {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 6vw, 2.1rem);
+            letter-spacing: 0.02em !important;
+            text-transform: none !important;
+        }
+
+        /* Modern Typography Classes */
         .font-naskh-extended {
             font-family: 'Amiri', serif;
             font-feature-settings: "rlig" 1, "calt" 1, "swsh" 1;
             text-justify: kashida;
             word-spacing: 0.08em;
+        }
+
+        [dir="ltr"] .font-naskh-extended {
+            font-family: 'Playfair Display', serif;
+            text-justify: auto;
+            word-spacing: normal;
+            font-style: italic;
+        }
+
+        /* English Handdrawn Script Names */
+        .font-english-vertical-names {
+            font-family: 'Pinyon Script', cursive !important;
+            line-height: 1.15;
         }
 
         /* Video Cover Overlay Transition */
@@ -123,7 +181,7 @@
             pointer-events: none !important;
         }
 
-        /* Sequential Fade-in Animations Triggered After Cover Dismissal */
+        /* Animations */
         @keyframes heroFadeInUp {
             0% {
                 opacity: 0;
@@ -135,9 +193,7 @@
             }
         }
 
-        .hero-reveal-1,
-        .hero-reveal-2,
-        .hero-reveal-3 {
+        .hero-reveal-1, .hero-reveal-2, .hero-reveal-3 {
             opacity: 0;
         }
 
@@ -153,7 +209,6 @@
             animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
         }
 
-        /* Smooth Top Fade for Clouds Section */
         .clouds-fade-top {
             position: absolute;
             top: 0;
@@ -172,7 +227,6 @@
             z-index: 5;
         }
 
-        /* Scroll Reveal Animation Styles */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -234,67 +288,85 @@
         <source src="images/music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- MUSIC ON/OFF BUTTON -->
-    <button id="musicToggle" type="button" aria-label="تشغيل / إيقاف الموسيقى" aria-pressed="false"
-        style="position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:40;width:42px;height:42px;border-radius:9999px;border:1px solid rgba(184,146,82,.5);background:rgba(243,239,230,.88);color:#6b5132;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0;pointer-events:none;transition:opacity .5s ease;">
-        <svg id="musicIconOn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-        <svg id="musicIconOff" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-    </button>
+    <!-- FLOATING CONTROLS BAR (MUSIC & LANGUAGE) -->
+    <div id="controlsBar" class="fixed top-3.5 left-3.5 right-3.5 z-40 flex justify-between items-center pointer-events-none transition-opacity duration-500 opacity-0">
+        
+        <!-- MUSIC TOGGLE BUTTON -->
+        <button id="musicToggle" type="button" aria-label="Toggle Music" aria-pressed="false"
+            class="pointer-events-auto w-10 h-10 rounded-full border border-gold-500/50 bg-[#f3efe6]/90 text-rsvpDark flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition">
+            <svg id="musicIconOn" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+            <svg id="musicIconOff" class="w-5 h-5 block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
 
-    <!-- FULLSCREEN COVER OVERLAY (STATIC POSTER + VIDEO) -->
+        <!-- LANGUAGE SWITCH BUTTON IN MAIN PAGE -->
+        <button id="langToggle" type="button" aria-label="Switch Language"
+            class="pointer-events-auto px-3.5 py-1.5 rounded-full border border-gold-500/50 bg-[#f3efe6]/90 text-rsvpDark font-bold text-xs tracking-wider shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition flex items-center gap-1.5 font-montserrat">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            <span class="langBtnText">EN</span>
+        </button>
+
+    </div>
+
+    <!-- FULLSCREEN COVER OVERLAY -->
     <div id="videoCover" class="fixed inset-0 z-50 flex items-center justify-center bg-[#eae3dc] overflow-hidden">
-        <!-- 1. INSTANT STATIC POSTER -->
+        
+        <!-- COVER LANGUAGE SWITCH BUTTON -->
+        <div class="absolute top-4 right-4 z-30">
+            <button id="coverLangToggle" type="button" aria-label="Switch Language on Cover"
+                class="px-3.5 py-1.5 rounded-full border border-gold-500/60 bg-[#f3efe6]/85 backdrop-blur-md text-rsvpDark font-bold text-xs tracking-wider shadow-md cursor-pointer hover:scale-105 active:scale-95 transition flex items-center gap-1.5 font-montserrat">
+                <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                <span class="langBtnText">EN</span>
+            </button>
+        </div>
+
+        <!-- DYNAMIC COVER POSTER -->
         <img id="posterImage" src="images/cover-poster.jpg" alt="غلاف الدعوة" decoding="async" class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300">
-
-        <!-- 2. VIDEO PLAYER -->
+        
+        <!-- DYNAMIC COVER VIDEO -->
         <video id="coverVideo" playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 hidden">
-            <source src="images/cover.mp4" type="video/mp4">
+            <source id="coverVideoSource" src="images/cover.mp4" type="video/mp4">
         </video>
-
-        <!-- 3. INVISIBLE FULL-SCREEN TAP LAYER -->
+        
         <button id="sealClickArea" type="button" aria-label="فتح الدعوة" class="absolute inset-0 z-20 w-full h-full cursor-pointer bg-transparent border-0 outline-none"></button>
     </div>
 
     <!-- Mobile Screen Frame Container (Max Width 430px) -->
     <div class="w-full max-w-[430px] bg-[#eae3dc] sm:rounded-[40px] shadow-2xl overflow-hidden relative flex flex-col my-auto border-0 sm:border border-gold-200/50">
 
-        <!-- HERO FULLSCREEN BACKGROUND VIDEO SECTION -->
+        <!-- HERO SECTION -->
         <section id="heroSection" class="relative w-full h-[100vh] h-[100dvh] min-h-[580px] sm:min-h-[720px] flex flex-col justify-between items-center text-center overflow-hidden pb-[calc(1.5rem+env(safe-area-inset-bottom))] px-6">
             <video autoplay loop muted playsinline webkit-playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
                 <source src="images/hero-bg.mp4" type="video/mp4">
             </video>
             
-            <!-- GRADIENT OVERLAY -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent via-60% to-[#eae3dc] z-0 pointer-events-none"></div>
 
-            <!-- Content Wrapper (Moved lower with pt-20 sm:pt-28) -->
             <div class="relative z-10 w-full max-w-xs mx-auto pt-20 sm:pt-28 flex flex-col items-center space-y-4 sm:space-y-5">
                 
-                <!-- 1. Monogram Logo -->
+                <!-- DYNAMIC MONOGRAM FOR HERO -->
                 <div class="hero-reveal-1">
-                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm">
+                    <img id="monogramAr1" src="images/monogram.png" alt="Monogram Arabic" decoding="async" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm block">
+                    <img id="monogramEn1" src="images/monogram-en.png" alt="Monogram English" decoding="async" class="w-12 sm:w-14 h-auto object-contain filter drop-shadow-sm hidden">
                 </div>
 
-                <!-- 2. Basmalah Image -->
-                <div class="hero-reveal-2 pt-1">
-                    <img src="images/basmalah.png" alt="بسم الله الرحمن الرحيم" decoding="async" class="w-52 sm:w-60 h-auto object-contain mx-auto filter drop-shadow-md brightness-110">
+                <!-- BASMALAH -->
+                <div class="hero-reveal-2 pt-1 flex justify-center items-center min-h-[40px]">
+                    <img id="basmalahImg" src="images/basmalah.png" alt="بسم الله الرحمن الرحيم" decoding="async" class="w-52 sm:w-60 h-auto object-contain mx-auto filter drop-shadow-md brightness-110 block">
+                    <img id="basmalahEnImg" src="images/basmalah-en.png" alt="In the Name of Allah, the Most Gracious, the Most Merciful" decoding="async" class="w-56 sm:w-64 h-auto object-contain mx-auto filter drop-shadow-md brightness-110 hidden">
                 </div>
 
-                <!-- 3. Quran Verse Frame -->
                 <div class="hero-reveal-3 max-w-[240px] sm:max-w-[270px] mx-auto space-y-2 px-2 pt-1">
-                    <p class="font-naskh-extended text-xs sm:text-sm leading-relaxed text-[#856431] drop-shadow-sm font-bold tracking-normal">
+                    <p data-i18n="verseText" class="font-naskh-extended text-xs sm:text-sm leading-relaxed text-[#856431] drop-shadow-sm font-bold tracking-normal">
                         ﴿ وَمِـنْ آَيَـاتِـهِ أَنْ خَـلَـقَ لَـكُـمْ مِـنْ أَنْـفُـسِـكُـمْ أَزْوَاجًـا لِّـتَـسْـكُـنُـوا إِلَـيْـهَـا وَجَـعَـلَ بَـيْـنَـكُـمْ مَوَدَّةً وَرَحْـمَـةً ۚ إِنَّ فِي ذَٰلِـكَ لَآَيَـاتٍ لِّـقَـوْمٍ يَـتَـفَـكَّـرُونَ ﴾
                     </p>
-                    <p class="font-naskh-extended text-[11px] sm:text-xs text-[#856431]/85 font-semibold tracking-wide pt-1">
+                    <p data-i18n="verseSource" class="font-naskh-extended text-[11px] sm:text-xs text-[#856431]/85 font-semibold tracking-wide pt-1">
                         ﴿ سُـورَةُ الـرُّومِ: ٢١ ﴾
                     </p>
                 </div>
-
             </div>
 
-            <!-- Scroll Indicator Icon -->
             <div class="relative z-10 animate-bounce flex justify-center pb-2">
-                <a href="#welcomeSection" aria-label="الانتقال إلى الترحيب" class="text-gold-100/90 hover:text-gold-100 transition drop-shadow-lg">
+                <a href="#welcomeSection" aria-label="Scroll down" class="text-gold-100/90 hover:text-gold-100 transition drop-shadow-lg">
                     <i data-lucide="chevron-down" class="w-8 h-8"></i>
                 </a>
             </div>
@@ -302,112 +374,109 @@
 
         <!-- WELCOME SECTION -->
         <section id="welcomeSection" class="relative z-20 w-full min-h-[500px] py-12 px-6 flex flex-col justify-center items-center text-center overflow-hidden reveal">
-            <!-- Background Image -->
-            <img src="images/welcome-bg.png" alt="خلفية الترحيب" decoding="async" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+            <img src="images/welcome-bg.png" alt="Welcome Background" decoding="async" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
 
-            <!-- Top Smooth Gradient Fade -->
             <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#eae3dc] via-[#eae3dc]/70 to-transparent z-0 pointer-events-none"></div>
-
-            <!-- Bottom Smooth Gradient Fade -->
             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#eae3dc] via-[#eae3dc]/60 to-transparent z-0 pointer-events-none"></div>
 
-            <!-- Content Container Layer -->
             <div class="relative z-10 max-w-sm mx-auto space-y-5 flex flex-col items-center justify-center my-auto">
+                
+                <!-- DYNAMIC MONOGRAM FOR WELCOME -->
                 <div>
-                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm">
+                    <img id="monogramAr2" src="images/monogram.png" alt="Monogram Arabic" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm block">
+                    <img id="monogramEn2" src="images/monogram-en.png" alt="Monogram English" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm hidden">
                 </div>
 
-                <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                <div data-i18n="welcomePoem1" class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>قد كُتب لنُوفمبَــــــر أنّ يَكون َ</p>
                     <p>استِثنائيــــــــاً هــذا العــــام</p>
                     <p>فَفِيــهِ تَكتمِـــــل فَرحتُنــــــا</p>
                 </div>
 
                 <div class="py-1">
-                    <span class="font-naskh-extended text-lg sm:text-xl font-bold text-gold-700 tracking-widest dir-ltr inline-block drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                    <span class="font-naskh-extended text-lg sm:text-xl font-bold text-gold-700 tracking-widest inline-block drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                         14.11.2026
                     </span>
                 </div>
 
-                <div class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                <div data-i18n="welcomePoem2" class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>ما بَين صُدفـــةٍ جَمعَـت الطُرق</p>
                     <p>وقَدرٍ رَتّب اللِقاء ، كُتِبت حِكايَة</p>
                     <p>كانَ للحٌبِ فيها أجمَل بدايــــــة</p>
                 </div>
 
                 <div class="flex items-center justify-center pt-1">
-                    <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-36 h-auto object-contain opacity-85">
+                    <img src="images/divider.png" alt="Divider" decoding="async" class="w-36 h-auto object-contain opacity-85">
                 </div>
             </div>
         </section>
 
         <!-- INVITATION CARD SECTION -->
         <section id="invitationCard" class="pb-12 pt-10 px-6 sm:px-8 text-center bg-[#eae3dc] relative flex flex-col items-center justify-center overflow-hidden reveal z-20">
-            <img src="images/names-bg.png" alt="خلفية الأسماء" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
+            <img src="images/names-bg.png" alt="Names Background" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-[#eae3dc] via-transparent to-[#eae3dc] pointer-events-none z-0"></div>
 
             <div class="relative z-10 space-y-6 max-w-sm mx-auto flex flex-col items-center w-full">
                 
-                <!-- INTRO TEXT (Amiri Bold with simplified Tashkeel & Line Spacing) -->
-                <div class="space-y-3 text-gold-700 font-naskh-extended font-bold text-lg sm:text-xl w-full leading-relaxed">
+                <div data-i18n="invitationIntro" class="space-y-3 text-gold-700 font-naskh-extended font-bold text-lg sm:text-xl w-full leading-relaxed">
                     <p class="tracking-wide">بِكُلِّ حُبٍّ وَمَوَدَّةٍ</p>
                     <p class="tracking-wide">تَتَشَرَّفُ</p>
                 </div>
 
-                <!-- FAMILY NAMES WITH KASHIDA & EXPANDED SPACING -->
-                <div class="grid grid-cols-2 gap-6 sm:gap-10 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2 items-start">
+                <!-- FAMILY NAMES -->
+                <div class="grid grid-cols-2 gap-6 sm:gap-8 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2 items-start">
                     <div class="flex flex-col items-center space-y-1">
-                        <span class="text-sm sm:text-base font-semibold text-gold-700/90">عائِـــــلَةُ</span>
-                        <span class="text-lg sm:text-2xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد غَسَّـان صَالَـح</span>
+                        <span data-i18n="familyPrefix1" class="text-xs sm:text-sm font-semibold text-gold-700/90">عائِـــــلَةُ</span>
+                        <span data-i18n="family1" class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد غَسَّـان صَالَـح</span>
                     </div>
                     <div class="flex flex-col items-center space-y-1">
-                        <span class="text-sm sm:text-base font-semibold text-gold-700/90">عائِـــــلَةُ</span>
-                        <span class="text-lg sm:text-2xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد وَلِيـد عِـزِّ الـدِّيـن</span>
+                        <span data-i18n="familyPrefix2" class="text-xs sm:text-sm font-semibold text-gold-700/90">عائِـــــلَةُ</span>
+                        <span data-i18n="family2" class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد وَلِيـد عِـزِّ الـدِّيـن</span>
                     </div>
                 </div>
 
                 <div>
-                    <p class="text-xs sm:text-sm font-normal text-gold-700 font-tajawal tracking-wide">
+                    <p data-i18n="invitationSub" class="text-xs sm:text-sm font-normal text-gold-700 font-tajawal tracking-wide">
                         بدعوتكم لحضور حفل نجليهما
                     </p>
                 </div>
 
-                <!-- NAMES MANUSCRIPT -->
-                <div class="py-1 flex justify-center items-center w-full">
-                    <img src="images/names.png" alt="مخطوطة أسماء العروسين عمر وسوزان" decoding="async" class="w-56 sm:w-64 h-auto object-contain drop-shadow-sm">
-                </div>
-
-                <!-- "وذلك بمشيئة الله" -->
-                <div class="text-gold-700 font-tajawal">
-                    <p class="text-sm sm:text-base font-medium">وذلك بمشيئة الله</p>
-                </div>
-
-                <!-- HORIZONTAL EVENT DETAILS WITHOUT BOXES/BACKGROUNDS -->
-                <div class="grid grid-cols-3 gap-2 w-full max-w-[340px] mx-auto pt-3 pb-2 items-end">
+                <!-- NAMES MANUSCRIPT / ENGLISH VERTICAL TEXT -->
+                <div class="py-2 flex justify-center items-center w-full">
+                    <img id="namesImg" src="images/names.png" alt="عمر وسوزان" decoding="async" class="w-56 sm:w-64 h-auto object-contain drop-shadow-sm block">
                     
-                    <!-- 1. DAY ITEM -->
-                    <div class="flex flex-col items-center justify-end">
-                        <img src="images/icon-day.png" alt="اليوم" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
-                        <span class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">يوم السبت</span>
+                    <!-- Vertical Handdrawn English Script Names -->
+                    <div id="namesEnglish" class="hidden flex-col items-center justify-center space-y-0.5 my-2">
+                        <span class="font-english-vertical-names text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Omar</span>
+                        <span class="font-english-vertical-names text-3xl sm:text-4xl text-gold-600 font-normal my-1">&</span>
+                        <span class="font-english-vertical-names text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Suzan</span>
                     </div>
-
-                    <!-- 2. DATE ITEM -->
-                    <div class="flex flex-col items-center justify-end">
-                        <img src="images/icon-date.png" alt="التاريخ" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
-                        <span class="text-xs sm:text-sm font-extrabold text-gold-700 font-tajawal mt-2 tracking-wider dir-ltr whitespace-nowrap">14.11.2026</span>
-                    </div>
-
-                    <!-- 3. TIME ITEM -->
-                    <div class="flex flex-col items-center justify-end">
-                        <img src="images/icon-time.png" alt="الساعة" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
-                        <span class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">الساعة 7:00 م</span>
-                    </div>
-
                 </div>
 
-                <!-- CLOSING PHRASE -->
+                <div>
+                    <p data-i18n="godWilling" class="text-sm sm:text-base font-medium text-gold-700 font-tajawal">وذلك بمشيئة الله</p>
+                </div>
+
+                <!-- EVENT DETAILS ICONS -->
+                <div class="grid grid-cols-3 gap-2 w-full max-w-[340px] mx-auto pt-3 pb-2 items-end">
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-day.png" alt="Day" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span data-i18n="eventDay" class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">يوم السبت</span>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-date.png" alt="Date" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span class="text-xs sm:text-sm font-extrabold text-gold-700 font-tajawal mt-2 tracking-wider whitespace-nowrap">14.11.2026</span>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-end">
+                        <img src="images/icon-time.png" alt="Time" decoding="async" class="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-sm">
+                        <span data-i18n="eventTime" class="text-xs sm:text-sm font-bold text-gold-700 font-tajawal mt-2 whitespace-nowrap">الساعة 7:00 م</span>
+                    </div>
+                </div>
+
                 <div class="pt-2 text-gold-700 font-tajawal w-full">
-                    <p class="text-sm sm:text-base font-medium leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
+                    <p data-i18n="closingMsg" class="text-sm sm:text-base font-medium leading-relaxed max-w-[280px] mx-auto text-gold-700/90">
                         حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا
                     </p>
                 </div>
@@ -415,54 +484,49 @@
             </div>
         </section>
 
-        <!-- EVENT DETAILS SECTION (MAP OPTIMIZED) -->
+        <!-- EVENT DETAILS SECTION -->
         <section id="details" class="py-12 px-6 bg-[#eae3dc] text-center relative z-10">
             <div class="max-w-xs mx-auto space-y-5">
-                <!-- Section Title -->
                 <div class="space-y-2">
-                    <h2 class="section-title text-gold-700">موقع الحفل</h2>
+                    <h2 data-i18n="venueTitle" class="section-title text-gold-700">موقع الحفل</h2>
                     <div class="flex items-center justify-center">
-                        <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
+                        <img src="images/divider.png" alt="Divider" decoding="async" class="w-32 h-auto object-contain opacity-75">
                     </div>
                 </div>
 
-                <!-- VENUE IMAGE -->
                 <div class="w-full my-2 flex items-center justify-center">
-                    <img src="images/venue.png" alt="فندق بالازو فيرساتشي" decoding="async" class="w-full h-auto object-contain rounded-2xl shadow-sm">
+                    <img src="images/venue.png" alt="Palazzo Versace" decoding="async" class="w-full h-auto object-contain rounded-2xl shadow-sm">
                 </div>
 
-                <!-- VENUE NAME & ADDRESS -->
                 <div class="space-y-1 text-sm text-bronze/90 font-tajawal py-1">
-                    <p class="font-bold text-base sm:text-lg text-gold-700">فندق بالازو فيرساتشي</p>
-                    <p class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
+                    <p data-i18n="venueName" class="font-bold text-base sm:text-lg text-gold-700">فندق بالازو فيرساتشي</p>
+                    <p data-i18n="venueAddress" class="text-xs sm:text-sm leading-relaxed text-bronze/80">الجداف، دبي - الإمارات العربية المتحدة</p>
                 </div>
 
-                <!-- EMBEDDED GOOGLE MAP (FAST EAGER LOAD) -->
                 <div class="w-full my-2 flex items-center justify-center">
                     <div class="relative w-full max-w-[310px] aspect-square rounded-[32px] overflow-hidden shadow-md flex items-center justify-center bg-[#eae3dc]">
                         <div class="absolute inset-[3%] rounded-[28px] overflow-hidden z-0">
                             <iframe 
-                                title="خريطة موقع الحفل"
+                                title="Wedding Venue Map"
                                 src="https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=ar&z=16&output=embed" 
+                                id="mapIframe"
                                 class="w-full h-full border-0 grayscale-[20%] contrast-[105%]" 
                                 allowfullscreen="" 
-                                loading="eager"
+                                loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <img src="images/map-frame.png" alt="إطار الخريطة الذهبي" decoding="async" class="absolute inset-0 w-full h-full object-fill pointer-events-none z-10">
+                        <img src="images/map-frame.png" alt="Map Frame" decoding="async" class="absolute inset-0 w-full h-full object-fill pointer-events-none z-10">
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
                 <div class="pt-2 flex flex-col items-center gap-3 max-w-[260px] mx-auto">
-                    <!-- ACCURATE MAP LOCATION LINK TO PALAZZO VERSACE DUBAI -->
-                    <a href="https://maps.google.com/?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold uppercase transition duration-300">
+                    <a href="https://maps.google.com/?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai" target="_blank" rel="noopener noreferrer" data-i18n="mapBtn" class="w-full py-2.5 px-6 border border-gold-600/70 hover:bg-gold-500/10 text-gold-700 rounded-full text-center text-xs sm:text-sm font-tajawal font-bold transition duration-300">
                         موقع القاعة (Map)
                     </a>
                     <button id="addToCalendar" type="button" class="w-full py-2 px-4 text-gold-700/90 hover:text-gold-700 rounded-full text-center text-xs sm:text-sm font-bold font-tajawal transition flex items-center justify-center gap-1.5 cursor-pointer">
                         <i data-lucide="calendar-plus" class="w-4 h-4"></i>
-                        إضافة للتقويم
+                        <span data-i18n="calendarBtn">إضافة للتقويم</span>
                     </button>
                 </div>
             </div>
@@ -472,13 +536,13 @@
         <section id="countdownSection" class="relative pt-12 pb-8 px-0 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal z-20">
             <div class="relative z-10 w-full flex flex-col items-center">
                 <div class="w-full flex justify-center items-center mb-3">
-                    <img src="images/clock.png" alt="ساعة كلاسيكية" decoding="async" class="w-36 sm:w-44 h-auto object-contain drop-shadow-md">
+                    <img src="images/clock.png" alt="Clock" decoding="async" class="w-36 sm:w-44 h-auto object-contain drop-shadow-md">
                 </div>
 
                 <div class="space-y-2 mb-8 px-4">
-                    <h2 class="section-title text-gold-700">الوقت المتبقي</h2>
+                    <h2 data-i18n="countdownTitle" class="section-title text-gold-700">الوقت المتبقي</h2>
                     <div class="flex items-center justify-center pt-1 px-4">
-                        <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
+                        <img src="images/divider.png" alt="Divider" decoding="async" class="w-32 h-auto object-contain opacity-75">
                     </div>
                 </div>
 
@@ -491,7 +555,7 @@
                             </svg>
                             <span id="days" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">يوم</span>
+                        <span data-i18n="unitDays" class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">يوم</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -502,7 +566,7 @@
                             </svg>
                             <span id="hours" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ساعة</span>
+                        <span data-i18n="unitHours" class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ساعة</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -513,7 +577,7 @@
                             </svg>
                             <span id="minutes" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">دقيقة</span>
+                        <span data-i18n="unitMinutes" class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">دقيقة</span>
                     </div>
 
                     <div class="flex flex-col items-center">
@@ -524,12 +588,12 @@
                             </svg>
                             <span id="seconds" class="absolute text-base sm:text-lg font-tajawal text-bronze font-bold">00</span>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ثانية</span>
+                        <span data-i18n="unitSeconds" class="text-xs sm:text-sm text-gold-700 font-bold font-tajawal mt-2">ثانية</span>
                     </div>
                 </div>
 
                 <div class="w-full mt-10 leading-none">
-                    <img src="images/drape.png" alt="زخرفة كريستال" decoding="async" class="w-full h-auto block object-cover">
+                    <img src="images/drape.png" alt="Drape" decoding="async" class="w-full h-auto block object-cover">
                 </div>
             </div>
         </section>
@@ -539,34 +603,34 @@
             <div class="max-w-[320px] mx-auto space-y-5">
                 
                 <div class="flex items-center justify-center pt-2">
-                    <img src="images/divider.png" alt="فاصل زخرفي" decoding="async" class="w-32 h-auto object-contain opacity-75">
+                    <img src="images/divider.png" alt="Divider" decoding="async" class="w-32 h-auto object-contain opacity-75">
                 </div>
 
                 <div class="text-center px-2 py-1 space-y-2">
-                    <p class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
+                    <p data-i18n="adultsOnly" class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
                         لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
                     </p>
-                    <p class="text-xs font-bold text-gold-700 font-free-calligraphy pt-0.5">
+                    <p data-i18n="withLove" class="text-xs font-bold text-gold-700 font-free-calligraphy pt-0.5">
                         مع كل الحب،
                     </p>
                 </div>
 
                 <div class="w-full flex justify-center items-center pt-2">
-                    <img src="images/chair.png" alt="كرسي الزفاف" decoding="async" class="w-24 sm:w-28 h-auto object-contain filter drop-shadow-sm">
+                    <img src="images/chair.png" alt="Wedding Chair" decoding="async" class="w-24 sm:w-28 h-auto object-contain filter drop-shadow-sm">
                 </div>
 
                 <div class="text-center space-y-1">
-                    <h2 class="section-title text-2xl sm:text-3xl text-rsvpDark tracking-tight">يرجى تأكيد الحضور</h2>
+                    <h2 data-i18n="rsvpTitle" class="section-title text-2xl sm:text-3xl text-rsvpDark tracking-tight">يرجى تأكيد الحضور</h2>
                 </div>
 
                 <form id="rsvpForm" class="space-y-4">
                     <div class="space-y-1.5">
-                        <div class="text-right space-y-0.5 pr-1">
-                            <label for="guestName" class="text-sm font-bold text-rsvpDark block">الاسم</label>
+                        <div class="space-y-0.5 pr-1">
+                            <label for="guestName" data-i18n="labelName" class="text-sm font-bold text-rsvpDark block">الاسم</label>
                         </div>
                         <div class="relative flex items-center">
-                            <input type="text" id="guestName" name="guestName" required class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 pl-10 text-right text-sm text-rsvpDark focus:outline-none focus:border-rsvpDark transition shadow-sm">
-                            <div class="absolute left-3.5 text-[#a19079] pointer-events-none">
+                            <input type="text" id="guestName" name="guestName" required class="w-full bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-3 px-4 text-sm text-rsvpDark focus:outline-none focus:border-rsvpDark transition shadow-sm">
+                            <div id="inputIcon" class="absolute left-3.5 text-[#a19079] pointer-events-none">
                                 <i data-lucide="wallet" class="w-4 h-4"></i>
                             </div>
                         </div>
@@ -577,8 +641,8 @@
                             <label class="block relative cursor-pointer select-none">
                                 <input type="radio" id="attending" name="attendance" value="حضور" class="hidden rsvp-radio" checked>
                                 <div class="rsvp-card-option flex items-center justify-between p-3.5 rounded-xl">
-                                    <div class="text-right">
-                                        <p class="text-sm font-bold text-rsvpDark leading-tight">بكل سرور أقبل</p>
+                                    <div>
+                                        <p data-i18n="acceptOption" class="text-sm font-bold text-rsvpDark leading-tight">بكل سرور أقبل</p>
                                     </div>
                                     <div class="radio-dot-outer w-5 h-5 rounded-full border border-[#8a7256] flex items-center justify-center flex-shrink-0 transition">
                                         <div class="radio-dot-inner w-2.5 h-2.5 rounded-full bg-rsvpDark opacity-0 scale-50 transition duration-200"></div>
@@ -589,8 +653,8 @@
                             <label class="block relative cursor-pointer select-none">
                                 <input type="radio" id="declining" name="attendance" value="اعتذار" class="hidden rsvp-radio">
                                 <div class="rsvp-card-option flex items-center justify-between p-3.5 rounded-xl">
-                                    <div class="text-right">
-                                        <p class="text-sm font-bold text-rsvpDark leading-tight">أعتذر عن الحضور</p>
+                                    <div>
+                                        <p data-i18n="declineOption" class="text-sm font-bold text-rsvpDark leading-tight">أعتذر عن الحضور</p>
                                     </div>
                                     <div class="radio-dot-outer w-5 h-5 rounded-full border border-[#8a7256] flex items-center justify-center flex-shrink-0 transition">
                                         <div class="radio-dot-inner w-2.5 h-2.5 rounded-full bg-rsvpDark opacity-0 scale-50 transition duration-200"></div>
@@ -601,16 +665,16 @@
                     </div>
 
                     <div class="space-y-1.5 pt-1">
-                        <div class="text-right space-y-0.5 pr-1">
-                            <span class="text-sm font-bold text-rsvpDark block">عدد المدعوين</span>
+                        <div class="space-y-0.5 pr-1">
+                            <span data-i18n="labelGuests" class="text-sm font-bold text-rsvpDark block">عدد المدعوين</span>
                         </div>
                         
                         <div class="flex items-center justify-between bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl py-2 px-4 shadow-sm">
-                            <button type="button" id="btnPlus" aria-label="زيادة العدد" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
+                            <button type="button" id="btnPlus" aria-label="Increase" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
                                 +
                             </button>
                             <span id="guestsDisplay" class="text-base font-bold text-rsvpDark tracking-widest dir-ltr">02</span>
-                            <button type="button" id="btnMinus" aria-label="إنقاص العدد" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
+                            <button type="button" id="btnMinus" aria-label="Decrease" class="w-9 h-9 flex items-center justify-center text-rsvpDark text-xl font-bold hover:bg-black/5 active:scale-95 rounded-lg transition">
                                 −
                             </button>
                         </div>
@@ -618,7 +682,7 @@
 
                     <div class="pt-3">
                         <button type="submit" class="w-full bg-[#6b5132] hover:bg-[#584127] active:scale-[0.98] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition duration-200 flex items-center justify-center gap-2 shadow-md">
-                            <span>تأكيد</span>
+                            <span data-i18n="submitBtn">تأكيد</span>
                             <i data-lucide="send" class="w-4 h-4 transform -rotate-90"></i>
                         </button>
                     </div>
@@ -627,24 +691,26 @@
 
                 <div id="thankYouMessage" class="hidden text-center py-6 space-y-2 bg-[#f8f5ef]/90 border border-[#c4b39b] rounded-xl shadow-sm">
                     <i data-lucide="heart" class="w-7 h-7 text-rsvpDark mx-auto fill-rsvpDark"></i>
-                    <h3 class="text-base font-bold text-rsvpDark font-tajawal">تم استلام ردكم بنجاح!</h3>
-                    <p class="text-xs text-rsvpDark/80 font-tajawal">شكراً لكم، ننتظركم بشوق لنحتفل معاً.</p>
+                    <h3 data-i18n="thankYouTitle" class="text-base font-bold text-rsvpDark font-tajawal">تم استلام ردكم بنجاح!</h3>
+                    <p data-i18n="thankYouSub" class="text-xs text-rsvpDark/80 font-tajawal">شكراً لكم، ننتظركم بشوق لنحتفل معاً.</p>
                 </div>
             </div>
         </section>
 
         <!-- CLOUDS & FINAL CLOSING SECTION -->
         <section class="relative w-full py-20 px-6 text-center bg-[#eae3dc] flex flex-col items-center justify-center overflow-hidden reveal sm:rounded-b-[40px] z-10 pb-[calc(5rem+env(safe-area-inset-bottom))]">
-            <img src="images/clouds.png" alt="غيوم" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
+            <img src="images/clouds.png" alt="Clouds" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 pointer-events-none z-0">
             <div class="clouds-fade-top"></div>
 
             <div class="relative z-10 space-y-5 max-w-xs mx-auto flex flex-col items-center">
-                <p class="text-xl sm:text-2xl text-gold-700 font-free-calligraphy leading-relaxed pt-2 font-bold">
+                <p data-i18n="footerText" class="text-xl sm:text-2xl text-gold-700 font-free-calligraphy leading-relaxed pt-2 font-bold">
                     حضوركم هو أجمل هدية تزيّن بداية رحلتنا
                 </p>
 
+                <!-- DYNAMIC MONOGRAM FOR FOOTER -->
                 <div class="pt-1">
-                    <img src="images/monogram.png" alt="شعار الأسماء" decoding="async" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm opacity-90">
+                    <img id="monogramAr3" src="images/monogram.png" alt="Monogram Arabic" decoding="async" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm opacity-90 block">
+                    <img id="monogramEn3" src="images/monogram-en.png" alt="Monogram English" decoding="async" class="w-10 sm:w-12 h-auto object-contain filter drop-shadow-sm opacity-90 hidden">
                 </div>
             </div>
         </section>
@@ -653,6 +719,199 @@
 
     <!-- Scripts Block -->
     <script>
+        // TRANSLATION DICTIONARY
+        const i18nData = {
+            ar: {
+                verseText: "﴿ وَمِـنْ آَيَـاتِـهِ أَنْ خَـلَـقَ لَـكُـمْ مِـنْ أَنْـفُـسِـكُـمْ أَزْوَاجًـا لِّـتَـسْـكُـنُـوا إِلَـيْـهَـا وَجَـعَـلَ بَـيْـنَـكُـمْ مَوَدَّةً وَرَحْـمَـةً ۚ إِنَّ فِي ذَٰلِـكَ لَآَيَـاتٍ لِّـقَـوْمٍ يَـتَـفَـكَّـرُونَ ﴾",
+                verseSource: "﴿ سُـورَةُ الـرُّومِ: ٢١ ﴾",
+                welcomePoem1: "<p>قد كُتب لنُوفمبَــــــر أنّ يَكون َ</p><p>استِثنائيــــــــاً هــذا العــــام</p><p>فَفِيــهِ تَكتمِـــــل فَرحتُنــــــا</p>",
+                welcomePoem2: "<p>ما بَين صُدفـــةٍ جَمعَـت الطُرق</p><p>وقَدرٍ رَتّب اللِقاء ، كُتِبت حِكايَة</p><p>كانَ للحٌبِ فيها أجمَل بدايــــــة</p>",
+                invitationIntro: "<p class='tracking-wide'>بِكُلِّ حُبٍّ وَمَوَدَّةٍ</p><p class='tracking-wide'>تَتَشَرَّفُ</p>",
+                familyPrefix1: "عائِـــــلَةُ",
+                family1: "السَّـيِّـد غَسَّـان صَالَـح",
+                familyPrefix2: "عائِـــــلَةُ",
+                family2: "السَّـيِّـد وَلِيـد عِـزِّ الـدِّيـن",
+                invitationSub: "بدعوتكم لحضور حفل نجليهما",
+                godWilling: "وذلك بمشيئة الله",
+                eventDay: "يوم السبت",
+                eventTime: "الساعة 7:00 م",
+                closingMsg: "حضوركم يكتمل به فرحنا وتكتمل به أجمل أوقاتنا",
+                venueTitle: "موقع الحفل",
+                venueName: "فندق بالازو فيرساتشي",
+                venueAddress: "الجداف، دبي - الإمارات العربية المتحدة",
+                mapBtn: "موقع القاعة (Map)",
+                calendarBtn: "إضافة للتقويم",
+                countdownTitle: "الوقت المتبقي",
+                unitDays: "يوم",
+                unitHours: "ساعة",
+                unitMinutes: "دقيقة",
+                unitSeconds: "ثانية",
+                adultsOnly: "لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة",
+                withLove: "مع كل الحب،",
+                rsvpTitle: "يرجى تأكيد الحضور",
+                labelName: "الاسم",
+                acceptOption: "بكل سرور أقبل",
+                declineOption: "أعتذر عن الحضور",
+                labelGuests: "عدد المدعوين",
+                submitBtn: "تأكيد",
+                thankYouTitle: "تم استلام ردكم بنجاح!",
+                thankYouSub: "شكراً لكم، ننتظركم بشوق لنحتفل معاً.",
+                footerText: "حضوركم هو أجمل هدية تزيّن بداية رحلتنا",
+                mapLang: "ar"
+            },
+            en: {
+                verseText: "“And one of His signs is that He created for you spouses from among yourselves so that you may find comfort in them. And He has placed between you compassion and mercy. Surely in this are signs for those who reflect.”",
+                verseSource: "Surah Ar-Rum [30:21]",
+                welcomePoem1: "<p>November is destined to be</p><p>extraordinary this year,</p><p>as our happiness becomes complete.</p>",
+                welcomePoem2: "<p>Between a chance that crossed paths</p><p>and a destiny that arranged our encounter,</p><p>a beautiful love story began.</p>",
+                invitationIntro: "<p class='font-playfair text-base sm:text-lg italic text-gold-700 font-normal'>Together with their families</p>",
+                familyPrefix1: "Family of",
+                family1: "Mr. Ghassan Salah",
+                familyPrefix2: "Family of",
+                family2: "Mr. Waleed Ezz El-Din",
+                invitationSub: "cordially invite you to celebrate the wedding of",
+                godWilling: "as they join their hearts and lives together",
+                eventDay: "Saturday",
+                eventTime: "7:00 PM",
+                closingMsg: "Your presence will bring us immense joy and complete our special evening",
+                venueTitle: "Venue Location",
+                venueName: "Palazzo Versace Hotel",
+                venueAddress: "Al Jaddaf, Dubai - United Arab Emirates",
+                mapBtn: "View Location Map",
+                calendarBtn: "Add to Calendar",
+                countdownTitle: "Countdown to the Big Day",
+                unitDays: "Days",
+                unitHours: "Hours",
+                unitMinutes: "Mins",
+                unitSeconds: "Secs",
+                adultsOnly: "To ensure an elegant and serene atmosphere, we kindly request an adults-only celebration. Thank you for your understanding.",
+                withLove: "With all love,",
+                rsvpTitle: "Please Confirm Your Presence",
+                labelName: "Full Name",
+                acceptOption: "Joyfully Accepts",
+                declineOption: "Regretfully Declines",
+                labelGuests: "Number of Guests",
+                submitBtn: "Confirm",
+                thankYouTitle: "Thank You!",
+                thankYouSub: "Your response has been received. We look forward to celebrating with you!",
+                footerText: "Your presence is the greatest gift as we begin our new journey together",
+                mapLang: "en"
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+            const basmalahImg = document.getElementById('basmalahImg');
+            const basmalahEnImg = document.getElementById('basmalahEnImg');
+            const namesImg = document.getElementById('namesImg');
+            const namesEnglish = document.getElementById('namesEnglish');
+            const inputIcon = document.getElementById('inputIcon');
+            const mapIframe = document.getElementById('mapIframe');
+
+            // Cover Dynamic Elements (Poster & Video)
+            const posterImage = document.getElementById('posterImage');
+            const coverVideo = document.getElementById('coverVideo');
+            const coverVideoSource = document.getElementById('coverVideoSource');
+
+            // Monograms Elements
+            const monogramAr1 = document.getElementById('monogramAr1');
+            const monogramEn1 = document.getElementById('monogramEn1');
+            const monogramAr2 = document.getElementById('monogramAr2');
+            const monogramEn2 = document.getElementById('monogramEn2');
+            const monogramAr3 = document.getElementById('monogramAr3');
+            const monogramEn3 = document.getElementById('monogramEn3');
+
+            html.setAttribute('lang', lang);
+            html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+            // Update Language Buttons Text
+            document.querySelectorAll('.langBtnText').forEach(el => {
+                el.innerText = lang === 'ar' ? 'EN' : 'عربي';
+            });
+
+            // Switch Cover Poster & Video dynamically based on Language
+            if (posterImage) {
+                posterImage.src = lang === 'ar' ? 'images/cover-poster.jpg' : 'images/cover-poster-en.jpg';
+            }
+            if (coverVideoSource && coverVideo) {
+                const newSource = lang === 'ar' ? 'images/cover.mp4' : 'images/cover-en.mp4';
+                if (coverVideoSource.getAttribute('src') !== newSource) {
+                    coverVideoSource.setAttribute('src', newSource);
+                    coverVideo.load();
+                }
+            }
+
+            // Switch Monograms based on Language
+            if (lang === 'ar') {
+                if (monogramAr1) monogramAr1.style.display = 'block';
+                if (monogramEn1) monogramEn1.style.display = 'none';
+                if (monogramAr2) monogramAr2.style.display = 'block';
+                if (monogramEn2) monogramEn2.style.display = 'none';
+                if (monogramAr3) monogramAr3.style.display = 'block';
+                if (monogramEn3) monogramEn3.style.display = 'none';
+            } else {
+                if (monogramAr1) monogramAr1.style.display = 'none';
+                if (monogramEn1) monogramEn1.style.display = 'block';
+                if (monogramAr2) monogramAr2.style.display = 'none';
+                if (monogramEn2) monogramEn2.style.display = 'block';
+                if (monogramAr3) monogramAr3.style.display = 'none';
+                if (monogramEn3) monogramEn3.style.display = 'block';
+            }
+
+            // Toggle Basmalah
+            if (basmalahImg && basmalahEnImg) {
+                if (lang === 'ar') {
+                    basmalahImg.style.display = 'block';
+                    basmalahEnImg.style.display = 'none';
+                } else {
+                    basmalahImg.style.display = 'none';
+                    basmalahEnImg.style.display = 'block';
+                }
+            }
+
+            // Toggle Visual Elements for English Names
+            if (namesImg && namesEnglish) {
+                if (lang === 'ar') {
+                    namesImg.classList.remove('hidden');
+                    namesImg.classList.add('block');
+                    namesEnglish.classList.add('hidden');
+                    namesEnglish.classList.remove('flex');
+                } else {
+                    namesImg.classList.add('hidden');
+                    namesImg.classList.remove('block');
+                    namesEnglish.classList.remove('hidden');
+                    namesEnglish.classList.add('flex');
+                }
+            }
+
+            if (inputIcon) {
+                if (lang === 'ar') {
+                    inputIcon.style.left = '0.875rem';
+                    inputIcon.style.right = 'auto';
+                } else {
+                    inputIcon.style.right = '0.875rem';
+                    inputIcon.style.left = 'auto';
+                }
+            }
+
+            // Update Text Contents
+            const data = i18nData[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (data[key] !== undefined) {
+                    el.innerHTML = data[key];
+                }
+            });
+
+            // Update Map Language
+            if (mapIframe) {
+                mapIframe.src = `https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=${data.mapLang}&z=16&output=embed`;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
                 window.lucide.createIcons();
@@ -664,13 +923,26 @@
             const sealClickArea = document.getElementById('sealClickArea');
             const bgMusic = document.getElementById('bgMusic');
             const heroSection = document.getElementById('heroSection');
+            const controlsBar = document.getElementById('controlsBar');
 
             const musicToggle = document.getElementById('musicToggle');
+            const langToggle = document.getElementById('langToggle');
+            const coverLangToggle = document.getElementById('coverLangToggle');
             const iconOn = document.getElementById('musicIconOn');
             const iconOff = document.getElementById('musicIconOff');
 
             let musicStarted = false;
             let userPaused = false;
+
+            // Language Toggle Event Handler
+            function toggleLanguage(e) {
+                if (e) e.stopPropagation();
+                const newLang = currentLang === 'ar' ? 'en' : 'ar';
+                applyLanguage(newLang);
+            }
+
+            if (langToggle) langToggle.addEventListener('click', toggleLanguage);
+            if (coverLangToggle) coverLangToggle.addEventListener('click', toggleLanguage);
 
             function updateMusicButton() {
                 const playing = !!bgMusic && !bgMusic.paused;
@@ -679,7 +951,7 @@
                 if (musicToggle) musicToggle.setAttribute('aria-pressed', String(playing));
             }
 
-            function startMusic() {
+            function unlockAndPlayAudio() {
                 if (!bgMusic || userPaused) return;
                 bgMusic.muted = false;
                 bgMusic.volume = 1;
@@ -688,7 +960,8 @@
                     p.then(() => { 
                         musicStarted = true; 
                         updateMusicButton(); 
-                    }).catch(() => { 
+                    }).catch((err) => { 
+                        console.warn('Autoplay blocked or audio load error:', err);
                         updateMusicButton(); 
                     });
                 }
@@ -702,7 +975,7 @@
                     if (document.hidden) {
                         if (!bgMusic.paused) bgMusic.pause();
                     } else if (musicStarted && !userPaused) {
-                        startMusic();
+                        unlockAndPlayAudio();
                     }
                 });
             }
@@ -713,7 +986,7 @@
                     if (!bgMusic) return;
                     if (bgMusic.paused) {
                         userPaused = false;
-                        startMusic();
+                        unlockAndPlayAudio();
                     } else {
                         userPaused = true;
                         bgMusic.pause();
@@ -729,11 +1002,10 @@
                 if (videoCover && !videoCover.classList.contains('fade-out')) {
                     videoCover.classList.add('fade-out');
                     triggerHeroSequence();
-                    if (musicToggle) {
-                        musicToggle.style.opacity = '1';
-                        musicToggle.style.pointerEvents = 'auto';
+                    if (controlsBar) {
+                        controlsBar.style.opacity = '1';
                     }
-                    startMusic();
+                    unlockAndPlayAudio();
                 }
             }
 
@@ -744,7 +1016,7 @@
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
-                startMusic();
+                unlockAndPlayAudio();
 
                 if (posterImage) posterImage.style.opacity = '0';
 
@@ -754,11 +1026,7 @@
                     coverVideo.classList.remove('hidden');
                     const videoPromise = coverVideo.play();
                     if (videoPromise !== undefined) {
-                        videoPromise.then(() => {
-                            // Video playing
-                        }).catch(() => {
-                            dismissCover();
-                        });
+                        videoPromise.then(() => {}).catch(() => { dismissCover(); });
                     }
                 } else {
                     dismissCover();
@@ -767,6 +1035,7 @@
 
             if (sealClickArea) {
                 sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
+                sealClickArea.addEventListener('touchstart', handleUserInteraction, { once: true, passive: false });
             }
 
             if (coverVideo) {
@@ -789,6 +1058,7 @@
                 revealElements.forEach(el => el.classList.add('active'));
             }
 
+            // COUNTDOWN TIMER
             const eventDate = new Date('November 14, 2026 19:00:00').getTime();
             const circumference = 226.19;
 
@@ -813,12 +1083,6 @@
                     if (hoursEl) hoursEl.innerText = '00';
                     if (minutesEl) minutesEl.innerText = '00';
                     if (secondsEl) secondsEl.innerText = '00';
-
-                    if (daysCircle) daysCircle.style.strokeDashoffset = circumference;
-                    if (hoursCircle) hoursCircle.style.strokeDashoffset = circumference;
-                    if (minutesCircle) minutesCircle.style.strokeDashoffset = circumference;
-                    if (secondsCircle) secondsCircle.style.strokeDashoffset = circumference;
-
                     stopCountdown();
                     return;
                 }
@@ -840,10 +1104,9 @@
             }
 
             function startCountdown() {
-                if (!countdownInterval) {
-                    updateCountdown();
-                    countdownInterval = setInterval(updateCountdown, 1000);
-                }
+                stopCountdown();
+                updateCountdown();
+                countdownInterval = setInterval(updateCountdown, 1000);
             }
 
             function stopCountdown() {
@@ -855,23 +1118,13 @@
 
             startCountdown();
 
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    stopCountdown();
-                } else {
-                    startCountdown();
-                }
-            });
-
-            window.addEventListener('beforeunload', stopCountdown);
-
-            /* CALENDAR INTEGRATION */
+            // CALENDAR INTEGRATION
             const addToCalBtn = document.getElementById('addToCalendar');
             if (addToCalBtn) {
                 addToCalBtn.addEventListener('click', () => {
                     const event = {
-                        title: "حفل زفاف عمر & سوزان",
-                        description: "نتشرف بحضوركم حفل زفافنا في فندق بالازو فيرساتشي – الجداف، دبي.",
+                        title: currentLang === 'ar' ? "حفل زفاف عمر & سوزان" : "Omar & Suzan Wedding",
+                        description: currentLang === 'ar' ? "نتشرف بحضوركم حفل زفافنا في فندق بالازو فيرساتشي – الجداف، دبي." : "We are honored by your presence at our wedding at Palazzo Versace Hotel, Al Jaddaf, Dubai.",
                         location: "Palazzo Versace Dubai, Al Jaddaf, Dubai",
                         startDateUTC: "20261114T150000Z",
                         endDateUTC: "20261114T190000Z"
@@ -915,6 +1168,7 @@
                 });
             }
 
+            // GUEST COUNTER & RSVP
             let currentGuestsCount = 2;
             const guestsDisplay = document.getElementById('guestsDisplay');
             const btnPlus = document.getElementById('btnPlus');
