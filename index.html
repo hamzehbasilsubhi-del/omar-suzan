@@ -210,8 +210,8 @@
             font-family: 'Cormorant Garamond', serif !important;
             font-style: italic !important;
             font-weight: 600 !important;
-            font-size: 1.25rem !important;
-            line-height: 1.5 !important;
+            font-size: 0.95rem !important;
+            line-height: 1.4 !important;
             letter-spacing: 0.02em !important;
         }
 
@@ -227,7 +227,7 @@
 
         [dir="ltr"] .welcome-poem-en {
             font-family: 'Playfair Display', serif !important;
-            font-size: 1.15rem !important;
+            font-size: 0.95rem !important;
             line-height: 1.4 !important;
             font-weight: 500 !important;
             font-style: italic !important;
@@ -855,7 +855,7 @@
                 verseSource: "( Surah Ar-Rum: 21 )",
                 welcomePoem1: "<p>November was destined to be extraordinary this year, for it is the month our joy becomes complete.</p>",
                 welcomePoem2: "<p>A beautiful coincidence crossed our paths, and destiny brought our hearts together.</p><p class='pt-1.5'>And so, our story was written - with love as its most beautiful beginning.</p>",
-                invitationIntro: "<p class='names-section-en text-lg sm:text-xl text-gold-700 font-semibold'>With love and great joy,</p>",
+                invitationIntro: "<p class='names-section-en text-xl sm:text-2xl text-gold-700 font-semibold'>With love and great joy,</p>",
                 familyPrefix1: "The family of",
                 family1: "Mr. Ghassan Saleh",
                 familyPrefix2: "The family of",
@@ -953,18 +953,18 @@
                 if (monogramEn3) monogramEn3.style.display = 'block';
             }
 
-            // Layout adjust for family names on English safely to keep side-by-side structure
+            // Layout adjust for family names on English safely to keep side-by-side structure with larger text size
             if (familyGridContainer) {
                 if (lang === 'en') {
                     familyGridContainer.className = "grid grid-cols-2 gap-2 sm:gap-4 text-gold-700 w-full max-w-[380px] mx-auto py-1 items-start text-center";
                     familyGridContainer.innerHTML = `
                         <div class="flex flex-col items-center space-y-0.5">
                             <span class="text-xs sm:text-sm font-normal text-gold-700/80 names-section-en">${i18nData.en.familyPrefix1}</span>
-                            <span class="family-name-english text-sm sm:text-base font-semibold text-gold-700">${i18nData.en.family1}</span>
+                            <span class="family-name-english text-base sm:text-lg font-bold text-gold-700">${i18nData.en.family1}</span>
                         </div>
                         <div class="flex flex-col items-center space-y-0.5">
                             <span class="text-xs sm:text-sm font-normal text-gold-700/80 names-section-en">${i18nData.en.familyPrefix2}</span>
-                            <span class="family-name-english text-sm sm:text-base font-semibold text-gold-700">${i18nData.en.family2}</span>
+                            <span class="family-name-english text-base sm:text-lg font-bold text-gold-700">${i18nData.en.family2}</span>
                         </div>
                     `;
                 } else {
@@ -1027,11 +1027,17 @@
                     if (lang === 'en') {
                         if (['invitationIntro', 'invitationSub', 'godWilling'].includes(key)) {
                             el.classList.add('names-section-en');
+                            if (key === 'invitationSub') {
+                                el.className = "text-sm sm:text-base font-semibold text-gold-700 font-tajawal tracking-wide names-section-en";
+                            }
                         } else if (key === 'closingMsg') {
                             el.classList.add('closing-msg-en');
                         }
                     } else if (lang === 'ar') {
                         el.classList.remove('names-section-en', 'closing-msg-en');
+                        if (key === 'invitationSub') {
+                            el.className = "text-xs sm:text-sm font-normal text-gold-700 font-tajawal tracking-wide";
+                        }
                     }
                 }
             });
