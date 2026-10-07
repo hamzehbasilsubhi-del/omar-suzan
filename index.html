@@ -31,7 +31,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Parisienne&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- Preconnect for Fast Google Maps Loading -->
     <link rel="preconnect" href="https://maps.google.com">
@@ -162,8 +162,45 @@
             font-style: italic;
         }
 
-        /* English Handdrawn Script Names */
-        .font-english-vertical-names {
+        /* English Welcome Section Container & Lines Adjustments */
+        [dir="ltr"] .welcome-poem-container {
+            max-width: 320px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+            padding-top: 1.75rem !important; /* Move contents slightly downward */
+        }
+
+        [dir="ltr"] .welcome-poem-en {
+            font-family: 'Alex Brush', cursive !important;
+            font-size: 1.35rem !important;
+            line-height: 1.18 !important; /* Reduced line height */
+            font-weight: 500 !important;
+            font-style: normal !important;
+            text-align: center !important;
+        }
+
+        /* English Family Name Font (New Elegance Style) */
+        [dir="ltr"] .family-container-english {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        [dir="ltr"] .family-name-english {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 1.25rem !important;
+            line-height: 1.3 !important;
+            font-weight: 600 !important;
+            font-style: italic !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        /* English Script Names Style */
+        .font-english-script {
             font-family: 'Pinyon Script', cursive !important;
             line-height: 1.15;
         }
@@ -355,10 +392,10 @@
                     <img id="basmalahEnImg" src="images/basmalah-en.png" alt="In the Name of Allah, the Most Gracious, the Most Merciful" decoding="async" class="w-56 sm:w-64 h-auto object-contain mx-auto filter drop-shadow-md brightness-110 hidden">
                 </div>
 
-                <div class="hero-reveal-3 max-w-[240px] sm:max-w-[270px] mx-auto space-y-2 px-2 pt-1">
-                    <p data-i18n="verseText" class="font-naskh-extended text-xs sm:text-sm leading-relaxed text-[#856431] drop-shadow-sm font-bold tracking-normal">
+                <div class="hero-reveal-3 max-w-[240px] sm:max-w-[280px] mx-auto space-y-2 px-2 pt-1">
+                    <div data-i18n="verseText" class="font-naskh-extended text-xs sm:text-sm leading-relaxed text-[#856431] drop-shadow-sm font-bold tracking-normal">
                         ﴿ وَمِـنْ آَيَـاتِـهِ أَنْ خَـلَـقَ لَـكُـمْ مِـنْ أَنْـفُـسِـكُـمْ أَزْوَاجًـا لِّـتَـسْـكُـنُـوا إِلَـيْـهَـا وَجَـعَـلَ بَـيْـنَـكُـمْ مَوَدَّةً وَرَحْـمَـةً ۚ إِنَّ فِي ذَٰلِـكَ لَآَيَـاتٍ لِّـقَـوْمٍ يَـتَـفَـكَّـرُونَ ﴾
-                    </p>
+                    </div>
                     <p data-i18n="verseSource" class="font-naskh-extended text-[11px] sm:text-xs text-[#856431]/85 font-semibold tracking-wide pt-1">
                         ﴿ سُـورَةُ الـرُّومِ: ٢١ ﴾
                     </p>
@@ -379,27 +416,27 @@
             <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#eae3dc] via-[#eae3dc]/70 to-transparent z-0 pointer-events-none"></div>
             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#eae3dc] via-[#eae3dc]/60 to-transparent z-0 pointer-events-none"></div>
 
-            <div class="relative z-10 max-w-sm mx-auto space-y-5 flex flex-col items-center justify-center my-auto">
+            <div class="relative z-10 max-w-sm mx-auto space-y-4 flex flex-col items-center justify-center my-auto welcome-poem-container">
                 
                 <!-- DYNAMIC MONOGRAM FOR WELCOME -->
-                <div>
+                <div class="pt-2">
                     <img id="monogramAr2" src="images/monogram.png" alt="Monogram Arabic" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm block">
                     <img id="monogramEn2" src="images/monogram-en.png" alt="Monogram English" decoding="async" class="w-11 sm:w-13 h-auto object-contain filter drop-shadow-sm hidden">
                 </div>
 
-                <div data-i18n="welcomePoem1" class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                <div data-i18n="welcomePoem1" class="font-naskh-extended welcome-poem-en text-base sm:text-lg font-bold text-gold-700 space-y-1 leading-snug drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>قد كُتب لنُوفمبَــــــر أنّ يَكون َ</p>
                     <p>استِثنائيــــــــاً هــذا العــــام</p>
                     <p>فَفِيــهِ تَكتمِـــــل فَرحتُنــــــا</p>
                 </div>
 
-                <div class="py-1">
+                <div class="py-0.5">
                     <span class="font-naskh-extended text-lg sm:text-xl font-bold text-gold-700 tracking-widest inline-block drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                         14.11.2026
                     </span>
                 </div>
 
-                <div data-i18n="welcomePoem2" class="font-naskh-extended text-base sm:text-lg font-bold text-gold-700 space-y-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
+                <div data-i18n="welcomePoem2" class="font-naskh-extended welcome-poem-en text-base sm:text-lg font-bold text-gold-700 space-y-1 leading-snug drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)]">
                     <p>ما بَين صُدفـــةٍ جَمعَـت الطُرق</p>
                     <p>وقَدرٍ رَتّب اللِقاء ، كُتِبت حِكايَة</p>
                     <p>كانَ للحٌبِ فيها أجمَل بدايــــــة</p>
@@ -423,15 +460,15 @@
                     <p class="tracking-wide">تَتَشَرَّفُ</p>
                 </div>
 
-                <!-- FAMILY NAMES -->
-                <div class="grid grid-cols-2 gap-6 sm:gap-8 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2 items-start">
+                <!-- FAMILY NAMES CONTAINER -->
+                <div id="familyGridContainer" class="grid grid-cols-2 gap-4 sm:gap-6 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2 items-start">
                     <div class="flex flex-col items-center space-y-1">
                         <span data-i18n="familyPrefix1" class="text-xs sm:text-sm font-semibold text-gold-700/90">عائِـــــلَةُ</span>
-                        <span data-i18n="family1" class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد غَسَّـان صَالَـح</span>
+                        <span data-i18n="family1" class="family-name-english text-base sm:text-lg font-bold tracking-tight whitespace-nowrap pt-0.5">السَّـيِّـد غَسَّـان صَالَـح</span>
                     </div>
                     <div class="flex flex-col items-center space-y-1">
                         <span data-i18n="familyPrefix2" class="text-xs sm:text-sm font-semibold text-gold-700/90">عائِـــــلَةُ</span>
-                        <span data-i18n="family2" class="text-base sm:text-xl font-bold tracking-tight whitespace-nowrap pt-1">السَّـيِّـد وَلِيـد عِـزِّ الـدِّيـن</span>
+                        <span data-i18n="family2" class="family-name-english text-base sm:text-lg font-bold tracking-tight whitespace-nowrap pt-0.5">السَّـيِّـد وَلِيـد عِـزِّ الـدِّيـن</span>
                     </div>
                 </div>
 
@@ -447,9 +484,9 @@
                     
                     <!-- Vertical Handdrawn English Script Names -->
                     <div id="namesEnglish" class="hidden flex-col items-center justify-center space-y-0.5 my-2">
-                        <span class="font-english-vertical-names text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Omar</span>
-                        <span class="font-english-vertical-names text-3xl sm:text-4xl text-gold-600 font-normal my-1">&</span>
-                        <span class="font-english-vertical-names text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Suzan</span>
+                        <span class="font-english-script text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Omar</span>
+                        <span class="font-english-script text-3xl sm:text-4xl text-gold-600 font-normal my-1">&</span>
+                        <span class="font-english-script text-6xl sm:text-7xl text-gold-700 font-normal tracking-wide">Suzan</span>
                     </div>
                 </div>
 
@@ -760,41 +797,41 @@
                 mapLang: "ar"
             },
             en: {
-                verseText: "“And one of His signs is that He created for you spouses from among yourselves so that you may find comfort in them. And He has placed between you compassion and mercy. Surely in this are signs for those who reflect.”",
-                verseSource: "Surah Ar-Rum [30:21]",
-                welcomePoem1: "<p>November is destined to be</p><p>extraordinary this year,</p><p>as our happiness becomes complete.</p>",
-                welcomePoem2: "<p>Between a chance that crossed paths</p><p>and a destiny that arranged our encounter,</p><p>a beautiful love story began.</p>",
-                invitationIntro: "<p class='font-playfair text-base sm:text-lg italic text-gold-700 font-normal'>Together with their families</p>",
-                familyPrefix1: "Family of",
-                family1: "Mr. Ghassan Salah",
-                familyPrefix2: "Family of",
-                family2: "Mr. Waleed Ezz El-Din",
+                verseText: "<div dir='ltr' class='flex flex-col items-center space-y-2'><p class='font-amiri text-xs sm:text-sm dir-rtl text-center leading-relaxed' dir='rtl'>﴿ وَمِـنْ آَيَـاتِـهِ أَنْ خَـلَـقَ لَـكُـمْ مِـنْ أَنْـفُـسِـكُـمْ أَزْوَاجًـا لِّـتَـسْـكُـنُـوا إِلَـيْـهَـا وَجَـعَـلَ بَـيْـنَـكُـمْ مَوَدَّةً وَرَحْـمَـةً ۚ إِنَّ فِي ذَٰلِـكَ لَآَيَـاتٍ لِّـقَـوْمٍ يَـتَـفَـكَّـرُونَ ﴾</p><p class='text-[11px] sm:text-xs leading-normal pt-1 font-playfair italic text-center'>“And one of His signs is that He created for you spouses from among yourselves so that you may find comfort in them. And He has placed between you compassion and mercy. Surely in this are signs for those who reflect.”</p></div>",
+                verseSource: "( Surah Ar-Rum: 21 )",
+                welcomePoem1: "<p>November was destined to be extraordinary this year, for it is the month our joy becomes complete.</p>",
+                welcomePoem2: "<p>A beautiful coincidence crossed our paths, and destiny brought our hearts together.</p><p class='pt-1.5'>And so, our story was written - with love as its most beautiful beginning.</p>",
+                invitationIntro: "<p class='font-cormorant text-lg sm:text-xl italic text-gold-700 font-semibold'>With love and great joy,</p>",
+                familyPrefix1: "The family of",
+                family1: "Mr. Ghassan Saleh",
+                familyPrefix2: "The family of",
+                family2: "Mr. Walid Ezzeddine",
                 invitationSub: "cordially invite you to celebrate the wedding of",
-                godWilling: "as they join their hearts and lives together",
+                godWilling: "God willing",
                 eventDay: "Saturday",
                 eventTime: "7:00 PM",
-                closingMsg: "Your presence will bring us immense joy and complete our special evening",
-                venueTitle: "Venue Location",
-                venueName: "Palazzo Versace Hotel",
-                venueAddress: "Al Jaddaf, Dubai - United Arab Emirates",
+                closingMsg: "Your presence will make our joy complete and our celebration all the more beautiful",
+                venueTitle: "Wedding Venue",
+                venueName: "PALAZZO VERSACE DUBAI",
+                venueAddress: "Jaddaf Waterfront, Dubai<br>United Arab Emirates",
                 mapBtn: "View Location Map",
                 calendarBtn: "Add to Calendar",
-                countdownTitle: "Countdown to the Big Day",
+                countdownTitle: "Countdown to Our Special Day",
                 unitDays: "Days",
                 unitHours: "Hours",
                 unitMinutes: "Mins",
                 unitSeconds: "Secs",
-                adultsOnly: "To ensure an elegant and serene atmosphere, we kindly request an adults-only celebration. Thank you for your understanding.",
-                withLove: "With all love,",
-                rsvpTitle: "Please Confirm Your Presence",
+                adultsOnly: "To create an elegant and intimate celebration, we kindly ask that our evening be an adults-only occasion. Thank you for your understanding and for being part of these special moments with us",
+                withLove: "With love,<br>Omar & Suzan",
+                rsvpTitle: "Kindly Confirm Your Attendance",
                 labelName: "Full Name",
                 acceptOption: "Joyfully Accepts",
                 declineOption: "Regretfully Declines",
                 labelGuests: "Number of Guests",
-                submitBtn: "Confirm",
+                submitBtn: "Confirm RSVP",
                 thankYouTitle: "Thank You!",
                 thankYouSub: "Your response has been received. We look forward to celebrating with you!",
-                footerText: "Your presence is the greatest gift as we begin our new journey together",
+                footerText: "As we begin this beautiful journey together, your presence is the most precious gift of all",
                 mapLang: "en"
             }
         };
@@ -810,8 +847,9 @@
             const namesEnglish = document.getElementById('namesEnglish');
             const inputIcon = document.getElementById('inputIcon');
             const mapIframe = document.getElementById('mapIframe');
+            const familyGridContainer = document.getElementById('familyGridContainer');
 
-            // Cover Dynamic Elements (Poster & Video)
+            // Cover Dynamic Elements
             const posterImage = document.getElementById('posterImage');
             const coverVideo = document.getElementById('coverVideo');
             const coverVideoSource = document.getElementById('coverVideoSource');
@@ -861,6 +899,32 @@
                 if (monogramEn3) monogramEn3.style.display = 'block';
             }
 
+            // Layout adjust for family names on English safely
+            if (familyGridContainer) {
+                if (lang === 'en') {
+                    familyGridContainer.className = "flex flex-col items-center space-y-2 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2";
+                    familyGridContainer.innerHTML = `
+                        <div class="family-container-english">
+                            <span class="family-name-english text-center"><span class="font-normal opacity-90">${i18nData.en.familyPrefix1}</span> ${i18nData.en.family1}</span>
+                            <span class="text-xs font-semibold italic text-gold-600/90 my-1">and</span>
+                            <span class="family-name-english text-center"><span class="font-normal opacity-90">${i18nData.en.familyPrefix2}</span> ${i18nData.en.family2}</span>
+                        </div>
+                    `;
+                } else {
+                    familyGridContainer.className = "grid grid-cols-2 gap-4 sm:gap-6 text-gold-700 font-naskh-extended font-bold w-full max-w-[380px] mx-auto py-2 items-start";
+                    familyGridContainer.innerHTML = `
+                        <div class="flex flex-col items-center space-y-1">
+                            <span data-i18n="familyPrefix1" class="text-xs sm:text-sm font-semibold text-gold-700/90">${i18nData.ar.familyPrefix1}</span>
+                            <span data-i18n="family1" class="family-name-english text-base sm:text-lg font-bold tracking-tight whitespace-nowrap pt-0.5">${i18nData.ar.family1}</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-1">
+                            <span data-i18n="familyPrefix2" class="text-xs sm:text-sm font-semibold text-gold-700/90">${i18nData.ar.familyPrefix2}</span>
+                            <span data-i18n="family2" class="family-name-english text-base sm:text-lg font-bold tracking-tight whitespace-nowrap pt-0.5">${i18nData.ar.family2}</span>
+                        </div>
+                    `;
+                }
+            }
+
             // Toggle Basmalah
             if (basmalahImg && basmalahEnImg) {
                 if (lang === 'ar') {
@@ -906,9 +970,12 @@
                 }
             });
 
-            // Update Map Language
+            // Update Map Language without unnecessary reload
             if (mapIframe) {
-                mapIframe.src = `https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=${data.mapLang}&z=16&output=embed`;
+                const targetSrc = `https://maps.google.com/maps?q=Palazzo+Versace+Dubai,+Al+Jaddaf,+Dubai&hl=${data.mapLang}&z=16&output=embed`;
+                if (mapIframe.src !== targetSrc) {
+                    mapIframe.src = targetSrc;
+                }
             }
         }
 
@@ -1012,7 +1079,6 @@
             let isInteractionHandled = false;
 
             function handleUserInteraction(e) {
-                if (e) e.preventDefault();
                 if (isInteractionHandled) return;
                 isInteractionHandled = true;
 
@@ -1035,7 +1101,7 @@
 
             if (sealClickArea) {
                 sealClickArea.addEventListener('click', handleUserInteraction, { once: true });
-                sealClickArea.addEventListener('touchstart', handleUserInteraction, { once: true, passive: false });
+                sealClickArea.addEventListener('touchstart', handleUserInteraction, { once: true, passive: true });
             }
 
             if (coverVideo) {
