@@ -718,7 +718,7 @@
                     </div>
 
                     <div class="pt-3">
-                        <button type="submit" class="w-full bg-[#6b5132] hover:bg-[#584127] active:scale-[0.98] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition duration-200 flex items-center justify-center gap-2 shadow-md">
+                        <button type="submit" id="submitBtn" class="w-full bg-[#6b5132] hover:bg-[#584127] active:scale-[0.98] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition duration-200 flex items-center justify-center gap-2 shadow-md">
                             <span data-i18n="submitBtn">تأكيد</span>
                             <i data-lucide="send" class="w-4 h-4 transform -rotate-90"></i>
                         </button>
@@ -756,6 +756,9 @@
 
     <!-- Scripts Block -->
     <script>
+        // GOOGLE APP SCRIPT WEB APP URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz7jjnwfdlmmXTBYEiL4TGYl3Wg24Q9XLD3cc7VusjNIJc53pTn0AVdJWdn_U3KHbUtEQ/exec';
+
         // TRANSLATION DICTIONARY
         const i18nData = {
             ar: {
@@ -1257,12 +1260,40 @@
             }
 
             const rsvpForm = document.getElementById('rsvpForm');
+            const submitBtn = document.getElementById('submitBtn');
+
             if (rsvpForm) {
                 rsvpForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    this.classList.add('hidden');
-                    const thankYouMsg = document.getElementById('thankYouMessage');
-                    if (thankYouMsg) thankYouMsg.classList.remove('hidden');
+
+                    // Disable button and show loading state
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+                    }
+
+                    const nameInput = document.getElementById('guestName').value;
+                    const attendanceInput = document.querySelector('input[name="attendance"]:checked').value;
+                    const guestsCount = currentGuestsCount;
+
+                    const formData = new FormData();
+                    formData.append('guestName', nameInput);
+                    formData.append('attendance', attendanceInput);
+                    formData.append('guestsCount', guestsCount);
+
+                    fetch(scriptURL, { method: 'POST', body: formData })
+                        .then(response => {
+                            rsvpForm.classList.add('hidden');
+                            const thankYouMsg = document.getElementById('thankYouMessage');
+                            if (thankYouMsg) thankYouMsg.classList.remove('hidden');
+                        })
+                        .catch(error => {
+                            console.error('Error submitting RSVP:', error);
+                            // Fallback display on error or network issues
+                            rsvpForm.classList.add('hidden');
+                            const thankYouMsg = document.getElementById('thankYouMessage');
+                            if (thankYouMsg) thankYouMsg.classList.remove('hidden');
+                        });
                 });
             }
         });
