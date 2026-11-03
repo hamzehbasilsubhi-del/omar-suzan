@@ -370,6 +370,19 @@
         .rsvp-radio:checked + .rsvp-card-option .radio-dot-outer {
             border-color: #6b5132;
         }
+
+        /* Animation for bouncing indicator */
+        @keyframes bounceUpDown {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        .animate-bounce-up-down {
+            animation: bounceUpDown 1.5s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-[#f3efe6] text-bronze antialiased flex justify-center items-center min-h-[100vh] min-h-[100dvh] sm:py-6 font-tajawal select-none">
@@ -690,6 +703,59 @@
             </div>
         </section>
 
+        <!-- GIFTS SECTION (MODIFIED: WAX SEAL WITHOUT BORDER/ROUNDED FRAME & SINGLE UPWARD BOUNCING ARROW ABOVE TEXT) -->
+        <section id="gifts" class="py-10 px-6 bg-[#eae3dc] reveal z-10 text-center">
+            <div class="max-w-[320px] mx-auto space-y-4">
+                
+                <h2 data-i18n="giftsTitle" class="section-title text-rsvpDark">هدايا</h2>
+                
+                <div class="flex items-center justify-center">
+                    <img src="images/divider.png" alt="Divider" decoding="async" class="w-32 h-auto object-contain opacity-75">
+                </div>
+
+                <div class="space-y-1 py-1">
+                    <p data-i18n="giftsText1" class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
+                        حضوركم أجمــل وأثمــن هديــة،
+                    </p>
+                    <p data-i18n="giftsText2" class="text-xs sm:text-sm text-rsvpDark font-tajawal leading-relaxed font-medium">
+                        لمن يرغب لائحة الهدايـــا متوفرة داخل الختــم
+                    </p>
+                </div>
+
+                <!-- Wax Seal Container (Without Circular Frame / Border) -->
+                <div class="pt-2 flex flex-col items-center">
+                    <button id="waxSealBtn" type="button" aria-label="Toggle Bank Information" class="relative group cursor-pointer focus:outline-none transition transform hover:scale-105 active:scale-95 p-1 bg-transparent border-0 shadow-none">
+                        <img src="images/wax-seal.png" alt="Wax Seal" decoding="async" class="w-24 h-24 sm:w-28 sm:h-28 object-contain mx-auto drop-shadow-md">
+                    </button>
+
+                    <!-- Click Here Text with Single Upward Bouncing Arrow Above It -->
+                    <div id="clickHereIndicator" class="mt-2 flex flex-col items-center cursor-pointer text-rsvpDark">
+                        <div class="animate-bounce-up-down mb-1">
+                            <i data-lucide="chevron-up" class="w-4 h-4 text-gold-700"></i>
+                        </div>
+                        <span data-i18n="clickHereText" class="text-xs font-bold tracking-wide font-tajawal">اضغط هنا</span>
+                    </div>
+                </div>
+
+                <!-- Bank Information Box (Hidden by Default, toggled via Wax Seal) -->
+                <div id="bankInfoBox" class="hidden text-right rtl:text-right ltr:text-left py-4 px-4 bg-[#f8f5ef]/95 border border-[#c4b39b] rounded-2xl shadow-md space-y-2 mt-3 transition-all duration-300">
+                    <div class="flex justify-between items-center border-b border-[#ebdcc4] pb-2 mb-2">
+                        <span class="text-xs font-bold text-gold-700 font-montserrat" data-i18n="bankDetailsTitle">Bank Account Details</span>
+                        <i data-lucide="landmark" class="w-4 h-4 text-gold-600"></i>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-rsvpDark font-tajawal">
+                        <p><strong>Bank Name:</strong> <span class="font-montserrat">ADIB</span></p>
+                        <p><strong>Account Holder Name:</strong> <span class="font-montserrat">OMAR GHASSAN HAMMOUDEH SALEH</span></p>
+                        <p><strong>Account Number:</strong> <span class="font-montserrat">28989986</span></p>
+                        <p><strong>IBAN:</strong> <span class="font-montserrat">AE210500000000028989986</span></p>
+                        <p><strong>SWIFT:</strong> <span class="font-montserrat">ABDIAEADXXX</span></p>
+                        <p><strong>Currency:</strong> <span class="font-montserrat">AED</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- RSVP SECTION -->
         <section id="rsvp" class="py-10 px-6 bg-[#eae3dc] reveal z-10">
             <div class="max-w-[320px] mx-auto space-y-5">
@@ -841,6 +907,11 @@
                 unitHours: "ساعة",
                 unitMinutes: "دقيقة",
                 unitSeconds: "ثانية",
+                giftsTitle: "هدايا",
+                giftsText1: "حضوركم أجمــل وأثمــن هديــة،",
+                giftsText2: "لمن يرغب لائحة الهدايـــا متوفرة داخل الختــم",
+                clickHereText: "اضغط هنا",
+                bankDetailsTitle: "تفاصيل الحساب البنكي",
                 adultsOnly: "لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر السهرة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة",
                 withLove: "مع كل الحب،",
                 rsvpTitle: "يرجى تأكيد الحضور",
@@ -879,6 +950,11 @@
                 unitHours: "Hours",
                 unitMinutes: "Mins",
                 unitSeconds: "Secs",
+                giftsTitle: "Wedding Gifts",
+                giftsText1: "Your presence is the most beautiful and precious gift,",
+                giftsText2: "For those who wish, the gift registry details are inside the seal.",
+                clickHereText: "Click Here",
+                bankDetailsTitle: "Bank Account Details",
                 adultsOnly: "To create an elegant and intimate celebration, we kindly ask that our evening be an adults-only occasion. Thank you for your understanding and for being part of these special moments with us.",
                 withLove: "With love,<br>Omar & Suzan",
                 rsvpTitle: "Kindly Confirm Your Attendance",
@@ -1058,6 +1134,24 @@
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
                 window.lucide.createIcons();
+            }
+
+            // Wax Seal Toggle for Bank Info Box
+            const waxSealBtn = document.getElementById('waxSealBtn');
+            const clickHereIndicator = document.getElementById('clickHereIndicator');
+            const bankInfoBox = document.getElementById('bankInfoBox');
+
+            function toggleBankInfo() {
+                if (bankInfoBox) {
+                    bankInfoBox.classList.toggle('hidden');
+                }
+            }
+
+            if (waxSealBtn) {
+                waxSealBtn.addEventListener('click', toggleBankInfo);
+            }
+            if (clickHereIndicator) {
+                clickHereIndicator.addEventListener('click', toggleBankInfo);
             }
 
             const videoCover = document.getElementById('videoCover');
